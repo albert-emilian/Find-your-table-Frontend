@@ -1,0 +1,46 @@
+.form-sign-up{
+    position: relative;
+    border-radius: 25px;
+    border: 2px solid black;
+    padding: 20px; 
+    margin: auto;
+    width: 600px;
+   
+}
+
+.component-title{
+    position: relative; /* or absolute */
+    top: 70%;
+    left: 50%;
+    width: 50%;
+}
+
+.form-group {
+    position: relative; /* or absolute */
+    top: 70%;
+    left: 30%;
+    width: 50%;
+}
+
+.btn {
+    position: relative; /* or absolute */
+    top: 35%;
+    left: 40%;
+    width: 30%
+}
+
+.forgot-password{
+    position: relative; /* or absolute */
+    top: 35%;
+    left: 32%;
+    width: 30%
+}
+
+.input-error{
+    position: relative; /* or absolute */
+    top: 50%;
+    left: 60%;
+    width: 50%;
+    height: 5px;
+}
+

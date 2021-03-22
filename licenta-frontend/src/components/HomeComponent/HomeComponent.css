@@ -1,0 +1,21 @@
+.home-links{
+    position: relative;
+    border-radius: 25px;
+    border: 2px solid black;
+    padding: 20px; 
+    margin: auto;
+    width: 600px;
+    top: 300px;
+}
+
+#link-login{
+    margin: 100px;
+    text-align: center;
+    width: 200px;
+}
+
+#link-register{
+  margin: 100px;
+  width: 200px;
+}
+
