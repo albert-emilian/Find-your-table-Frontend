@@ -6,11 +6,14 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGIN_VALIDATION_ERRORS,
-    DISPLAY_TWO_FACTOR_FORM
+    DISPLAY_TWO_FACTOR_FORM,
+    TWO_FACTOR_VALIDATION_ERRORS,
+    LOGOUT_SUCCESS,
 } from "../actiontypes/index.js";
 
 import userRegisterValidation from '../helpers/userRegisterValidation';
 import userLoginValidation from '../helpers/userLoginValidation';
+import twoFactorInputCodeValidation from '../helpers/twoFactorInputCodeValidation'; 
 
 export const registerUser = async  (user,dispatch,entity) => {
    
@@ -35,7 +38,6 @@ export const registerUser = async  (user,dispatch,entity) => {
             }});
 
     } catch (error) {
-        console.log(error);
         if(error.validationErrors)
             dispatch({type: VALIDATION_ERROR, payload:{validationErrors: error.validationErrors}});
         
@@ -85,26 +87,49 @@ export const loginUser = async (user, dispatch,entity) => {
     }
 }
 
-export const twoFactorValidation = async (userId, code, entity) => {
+export const twoFactorValidation = async (userId, token, entity,dispatch) => {
     
     try {
         let result = null;
+
+        twoFactorInputCodeValidation(token);
        
         if(entity === "customer"){
             result = await axios.post(`http://localhost:8080/${entity}/login/twofactor`, {
                 customerId: userId,
-                token: code
+                token: token
             });
-        }else{
+        }else if (entity === "administrator"){
             result = await axios.post(`http://localhost:8080/${entity}/login/twofactor`, {
                 administratorId: userId,
-                token: code
+                token: token
             });
         }
+
+        const { accesToken } = result.data;
+        const { refreshToken } = result.data;
+        const  loggedUser  = { ...result.data.user };
+
+       return {
+           accesToken: accesToken,
+           refreshToken: refreshToken,
+           loggedUser: loggedUser
+       };
         
     } catch (error) {
-        console.log(error.response)
+    if(error.errorMessage)
+    dispatch({type: TWO_FACTOR_VALIDATION_ERRORS, payload: {twoFactorLoginValidationError: error.errorMessage}});
+    
+    if(error.response && error.response.data)
+    dispatch({type: TWO_FACTOR_VALIDATION_ERRORS, payload: {twoFactorLoginValidationError: error.response.data.message}});
     }
+    
+}
+
+export const signOut = async (entity,dispatch,history) => {
+
+    dispatch({type: LOGOUT_SUCCESS});
+    history.push(`/login/${entity}`);
 }
 
 

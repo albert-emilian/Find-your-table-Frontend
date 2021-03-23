@@ -5,7 +5,8 @@ import {
     LOGIN_VALIDATION_ERRORS,
     LOGIN_FAIL_CLOSE,
     DISPLAY_TWO_FACTOR_FORM,
-    HIDE_TWO_FACTOR_FORM
+    HIDE_TWO_FACTOR_FORM,
+    TWO_FACTOR_VALIDATION_ERRORS,
 } from '../actiontypes/index'
 
 const initialState = {
@@ -26,16 +27,23 @@ const initialState = {
 
     loginValidationErrors: [],
     renderTwoFactorForm: false,
-    userId: ""
+    userId: "",
+    twoFactorLoginValidationError: "",
 }
 
 export default function(state = initialState, action){
     switch(action.type){
 
+        case TWO_FACTOR_VALIDATION_ERRORS:
+            return {
+                ...state,
+                twoFactorLoginValidationError: action.payload.twoFactorLoginValidationError
+            }
+
         case LOGIN_VALIDATION_ERRORS:
             return {
                 ...state,
-                loginValidationErrors: action.payload.loginValidationErrors
+                loginValidationError: action.payload.loginValidationError
             };
         
 
@@ -69,12 +77,14 @@ export default function(state = initialState, action){
         case HIDE_TWO_FACTOR_FORM:
             return {
                 ...state,
-                renderTwoFactorForm: false
+                renderTwoFactorForm: false,
+                userId: ""
             }; 
         
         case LOGIN_SUCCESS:
             return {
                 ...state,
+                renderTwoFactorForm: false,
                 loggedIn: true,
                 loggedUser: {
                     email: action.payload.loggedUser.email,
@@ -82,9 +92,12 @@ export default function(state = initialState, action){
                     lastName: action.payload.loggedUser.lastName,
                     role: action.payload.loggedUser.role,
                 }
+
             };
 
         case LOGOUT_SUCCESS:
+            localStorage.removeItem('REFRESH_TOKEN');
+            localStorage.removeItem('ACCES_TOKEN');
             return {
                 ...state,
                 loggedIn: false,

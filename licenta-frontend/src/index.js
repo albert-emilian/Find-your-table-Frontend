@@ -13,7 +13,9 @@ import LoginComponent from "./components/auth/LoginComponent/LoginComponent";
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/index'
-
+import ProtectedRoute from './components/ProtectedRoute'
+import CustomerPageComponent from './components/CustomerPageComponent/CustomerPageComponent'
+import AdministratorPageComponent from './components/AdministratorPageComponent/AdministratorPageComponent'
 
 const store = createStore(rootReducer);
 
@@ -38,6 +40,8 @@ ReactDOM.render(
                 <Route exact path="/register/administrator">
                     <RegisterComponent />
                 </Route>
+                <ProtectedRoute exact path='/customer/page' component={CustomerPageComponent} entity={window.location.pathname.split('/')[1]} />
+                <ProtectedRoute exact path='/administrator/page' component={AdministratorPageComponent} entity={window.location.pathname.split('/')[1]}/>
             </Switch>
           </Provider>
         </Router>

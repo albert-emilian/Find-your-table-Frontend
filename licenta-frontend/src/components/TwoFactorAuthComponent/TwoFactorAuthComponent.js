@@ -3,9 +3,22 @@ import './TwoFactorAuthComponent.css';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { twoFactorValidation } from '../../actions/authActions';
-
+import { useHistory } from "react-router-dom";
+import { 
+    HIDE_TWO_FACTOR_FORM,
+    LOGIN_SUCCESS
+} from '../../actiontypes/index'
 
  function TwoFactorAuthComponent(props) {
+
+    const history = useHistory();
+
+        history.listen(() => {
+          if (history.action === 'POP' && (window.location.pathname === "/login/customer" 
+                                            || window.location.pathname === "/login/administrator")) {
+                   props.dispatch({type:HIDE_TWO_FACTOR_FORM }) ;
+          }
+        });
 
     const [code, setCode] = useState({
         code: ""
@@ -17,11 +30,29 @@ import { twoFactorValidation } from '../../actions/authActions';
         });
     }
 
-    const handleSignInButton = () => {
+    const handleSignInButton = async () => {
         
         const entity = window.location.pathname.split('/')[2];
-        twoFactorValidation(props.userId, code, entity);
+        const data = await twoFactorValidation(props.userId, Object.values(code)[0], entity, props.dispatch);
+         
+        
+
+        props.dispatch({type: LOGIN_SUCCESS, payload: {
+            loggedUser: {
+                email: data.loggedUser.Email,
+                firstName: data.loggedUser.FirstName,
+                lastName: data.loggedUser.LastName,
+                role: data.loggedUser.Role,
+            }
+        }})
+
+        window.localStorage.setItem("ACCES_TOKEN", data.accesToken);
+        window.localStorage.setItem("REFRESH_TOKEN", data.refreshToken);
+  
+
+        history.push(`/${entity}/page`);
     }
+    
 
     return (
         <div className='popup-two-factor-auth'>  
@@ -32,15 +63,23 @@ import { twoFactorValidation } from '../../actions/authActions';
                     <input name="code" type="text" onChange={handleOnChange}></input>
                 </label>
                 <button onClick={handleSignInButton}>Sign in</button>  
+                <div>
+                    {
+                        props.twoFactorLoginValidationError ? 
+                            <p>{props.twoFactorLoginValidationError}</p> : null
+                    }
+                </div>
             </div>
-              {console.log(props.userId)}
             </div>
         </div>  
     )
 }
 
 const mapStateToProps = (state) =>({
-    userId: state.login.userId
+    userId: state.login.userId, 
+    twoFactorLoginValidationError: state.login.twoFactorLoginValidationError,
+    loggedIn: state.login.loggedIn
+   
 })
 
 export default connect(mapStateToProps)(TwoFactorAuthComponent);

@@ -4,7 +4,7 @@ const userValidation = (
     email,
     password,
   ) => {
-
+    
     let errorArray = [];
   
     if (validator.isEmail(email) === false || validator.isEmpty(email) === true)
