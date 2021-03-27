@@ -29,6 +29,7 @@ function Login(props) {
 
         const entity = window.location.pathname.split('/')[2];
         loginUser(loginCredentials,props.dispatch, entity);
+        
     }
 
     function renderError(errorsArray, inputName){

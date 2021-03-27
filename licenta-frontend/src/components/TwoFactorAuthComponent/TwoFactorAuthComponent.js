@@ -34,8 +34,10 @@ import {
         
         const entity = window.location.pathname.split('/')[2];
         const data = await twoFactorValidation(props.userId, Object.values(code)[0], entity, props.dispatch);
-         
-        
+
+       
+
+       if(!data) return;
 
         props.dispatch({type: LOGIN_SUCCESS, payload: {
             loggedUser: {
@@ -43,13 +45,12 @@ import {
                 firstName: data.loggedUser.FirstName,
                 lastName: data.loggedUser.LastName,
                 role: data.loggedUser.Role,
-            }
+                
+            },
+            accesToken: data.accesToken,
+            refreshToken: data.refreshToken
         }})
-
-        window.localStorage.setItem("ACCES_TOKEN", data.accesToken);
-        window.localStorage.setItem("REFRESH_TOKEN", data.refreshToken);
-  
-
+        
         history.push(`/${entity}/page`);
     }
     

@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
-import { signOut } from '../../actions/authActions'
+import { signOut } from '../../actions/authActions';
+import RestaurantFormComponent from '../RestaurantFormComponent/RestaurantFormComponent'
 
 export const AdministratorPageComponent = (props) => {
 
@@ -18,6 +19,8 @@ export const AdministratorPageComponent = (props) => {
         <div>
             AdministratorPage
             <button name="signOutButton" onClick={handleSignOutClick}>Sign out</button>
+            <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+            <RestaurantFormComponent></RestaurantFormComponent>
         </div>
     )
 }

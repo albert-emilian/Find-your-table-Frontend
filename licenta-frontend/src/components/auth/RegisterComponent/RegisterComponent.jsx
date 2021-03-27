@@ -48,6 +48,7 @@ function SignUp(props){
 
     registerUser(user,props.dispatch,entity);
     setRenderQrCode(true);
+   
   }
 
   const handleRenderQrCodeClose = (evt) => {
@@ -56,8 +57,6 @@ function SignUp(props){
       registerSuccess: false
     }})
     setRenderQrCode(false);
-
-
   }
 
   const handleErrorPopUpClose = (evt) => {

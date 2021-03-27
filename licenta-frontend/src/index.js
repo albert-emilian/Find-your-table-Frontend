@@ -16,9 +16,10 @@ import rootReducer from './reducers/index'
 import ProtectedRoute from './components/ProtectedRoute'
 import CustomerPageComponent from './components/CustomerPageComponent/CustomerPageComponent'
 import AdministratorPageComponent from './components/AdministratorPageComponent/AdministratorPageComponent'
+import './index.css'
+
 
 const store = createStore(rootReducer);
-
 
 ReactDOM.render(
   <React.StrictMode>

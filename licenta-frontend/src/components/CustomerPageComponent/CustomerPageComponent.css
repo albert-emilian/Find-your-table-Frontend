@@ -1,0 +1,7 @@
+
+.container-restaurant-list{
+    position: relative;
+    left: 50%;
+    right: 50%;
+    overflow: scroll;
+}

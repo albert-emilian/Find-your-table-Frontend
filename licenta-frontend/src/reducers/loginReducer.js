@@ -82,6 +82,8 @@ export default function(state = initialState, action){
             }; 
         
         case LOGIN_SUCCESS:
+            window.localStorage.setItem("ACCES_TOKEN", action.payload.accesToken);
+            window.localStorage.setItem("REFRESH_TOKEN", action.payload.refreshToken);
             return {
                 ...state,
                 renderTwoFactorForm: false,

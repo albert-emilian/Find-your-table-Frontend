@@ -23,7 +23,7 @@ export const registerUser = async  (user,dispatch,entity) => {
 
         userRegisterValidation(email,password,firstName,lastName,phone,confirmPassword)
 
-        const result = await axios.post(`http://localhost:8080/${entity}/register`,{
+        const result = await axios.post(`http://localhost:8000/${entity}/register`,{
            user:{
             Email: email,
             FirstName: firstName,
@@ -56,7 +56,7 @@ export const loginUser = async (user, dispatch,entity) => {
 
         userLoginValidation(email, password);
 
-        const result = await axios.post(`http://localhost:8080/${entity}/verifyCredentials`,{
+        const result = await axios.post(`http://localhost:8000/${entity}/verifyCredentials`,{
            user:{
             Email: email,
             Password: password
@@ -95,16 +95,18 @@ export const twoFactorValidation = async (userId, token, entity,dispatch) => {
         twoFactorInputCodeValidation(token);
        
         if(entity === "customer"){
-            result = await axios.post(`http://localhost:8080/${entity}/login/twofactor`, {
+            result = await axios.post(`http://localhost:8000/${entity}/login/twofactor`, {
                 customerId: userId,
                 token: token
             });
         }else if (entity === "administrator"){
-            result = await axios.post(`http://localhost:8080/${entity}/login/twofactor`, {
+            result = await axios.post(`http://localhost:8000/${entity}/login/twofactor`, {
                 administratorId: userId,
                 token: token
             });
         }
+
+        
 
         const { accesToken } = result.data;
         const { refreshToken } = result.data;
