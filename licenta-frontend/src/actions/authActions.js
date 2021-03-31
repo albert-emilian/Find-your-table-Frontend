@@ -9,6 +9,7 @@ import {
     DISPLAY_TWO_FACTOR_FORM,
     TWO_FACTOR_VALIDATION_ERRORS,
     LOGOUT_SUCCESS,
+    RESTAURANT_LOGOUT_CLEAR
 } from "../actiontypes/index.js";
 
 import userRegisterValidation from '../helpers/userRegisterValidation';
@@ -112,6 +113,7 @@ export const twoFactorValidation = async (userId, token, entity,dispatch) => {
         const { refreshToken } = result.data;
         const  loggedUser  = { ...result.data.user };
 
+
        return {
            accesToken: accesToken,
            refreshToken: refreshToken,
@@ -129,9 +131,10 @@ export const twoFactorValidation = async (userId, token, entity,dispatch) => {
 }
 
 export const signOut = async (entity,dispatch,history) => {
-
+   
     dispatch({type: LOGOUT_SUCCESS});
     history.push(`/login/${entity}`);
+    dispatch({type: RESTAURANT_LOGOUT_CLEAR});
 }
 
 

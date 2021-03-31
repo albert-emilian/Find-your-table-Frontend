@@ -3,6 +3,7 @@ import {
     RESTAURANT_INFO_SAVE_SUCCES ,
     RESTAURANT_INFO_SAVE_VALIDATION_ERROR,
     RESTAURANT_INFO_SAVE_FAIL,
+    RESTAURANTS_RETRIEVED_BY_CITY_LOADING,
     RESTAURANTS_RETRIEVED_BY_CITY_SUCCES,
     RESTAURANTS_RETRIEVED_BY_CITY_FAIL
  } from '../actiontypes/index'
@@ -37,6 +38,31 @@ import restaurantInfoValidation from '../helpers/restaurantInfoValidation'
         dispatch({type: RESTAURANT_INFO_SAVE_FAIL, payload: { restaurantInfoFail:{
             errorMessage: error.response.data.message
         }}});
+    }
+ }
+
+ export const getRestaurantsByCustomerLocation = async  (city, county, dispatch) =>{
+
+    try {
+        console.log(city,county)
+        console.log({acces:localStorage.getItem("ACCES_TOKEN"),refresh: localStorage.getItem("REFRESH_TOKEN")})
+        const result = await axios.post("http://localhost:8000/restaurant/location/all", {
+            City: city,
+            County: county,
+            accesToken: localStorage.getItem("ACCES_TOKEN"),
+            refreshToken: localStorage.getItem("REFRESH_TOKEN")
+        });
+
+       return result;
+
+    } catch (error) {
+        console.log(error.response.data)
+       
+        // dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_FAIL, payload: {
+        //     restaurantsRetrievedByCityCustomerLocationError: {
+        //         errorMessage: error.message
+        //     }
+        // } });
     }
  }
 

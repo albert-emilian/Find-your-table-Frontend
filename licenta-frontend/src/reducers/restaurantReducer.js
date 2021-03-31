@@ -4,7 +4,8 @@ import {
     RESTAURANT_INFO_SAVE_FAIL,
     RESTAURANTS_RETRIEVED_BY_CITY_SUCCES,
     RESTAURANTS_RETRIEVED_BY_CITY_FAIL,
-    RESTAURANTS_RETRIEVED_BY_CITY_LOADING
+    RESTAURANTS_RETRIEVED_BY_CITY_LOADING,
+    RESTAURANT_LOGOUT_CLEAR
 } from '../actiontypes/index'
 
 const initialState = {
@@ -59,7 +60,7 @@ const initialState = {
                 ...state,
                 isRestaurantListRetrievedByCustomerLocation: true, 
                 restaurantsRetrievedByCustomerLocationLoading: false,
-                restaurantsRetrievedByCustomerLocationCityList: action.payload.restaurantsRetrievedByCity
+                restaurantsRetrievedByCustomerLocationCityList: action.payload.restaurantsRetrievedByCustomerLocationCityList
             };
 
         case RESTAURANTS_RETRIEVED_BY_CITY_FAIL:
@@ -71,6 +72,13 @@ const initialState = {
                     isError: true,
                     errorMessage: action.payload.restaurantsRetrievedByCityError.errorMessage
                 }
+            };
+
+        case RESTAURANT_LOGOUT_CLEAR:
+            return {
+                ...state,
+                restaurantsRetrievedByCustomerLocationCityList: [],
+                isRestaurantListRetrievedByCustomerLocation: false
             };
 
          default: return state;   

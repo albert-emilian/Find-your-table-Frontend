@@ -1,12 +1,14 @@
 import './LoginComponent.css'
 import { withRouter, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { loginUser } from '../../../actions/authActions';
 import { connect } from 'react-redux';
 import { EMAIL, PASSWORD } from '../../../helpers/constants'
 import ReactDom from 'react-dom';
 import ErrorComponent from "../../ErrorComponent/ErrorComponent";
-import { LOGIN_FAIL_CLOSE } from '../../../actiontypes/index';
+import { 
+    LOGIN_FAIL_CLOSE,
+    RESTAURANT_LOGOUT_CLEAR} from '../../../actiontypes/index';
 import TwoFactorAuthComponent from '../../TwoFactorAuthComponent/TwoFactorAuthComponent';
 
 
@@ -16,6 +18,10 @@ function Login(props) {
         email: "",
         password: ""
     });
+
+    useEffect(()=>{
+        props.dispatch({type:RESTAURANT_LOGOUT_CLEAR});
+    }, [])
 
     const handleChange = (evt) => {
         setLoginCredentials({

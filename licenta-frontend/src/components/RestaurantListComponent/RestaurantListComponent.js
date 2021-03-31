@@ -1,53 +1,46 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import RestaurantListItemComponent from '../RestaurantListItemComponent/RestaurantListItemComponent';
 import LoadingComponent from '../LoadingComponent/LoadingComponent'
+import { getRestaurantsByCustomerLocation } from '../../actions/restaurantActions'
 import {
+    RESTAURANT_INFO_SAVE_SUCCES ,
+    RESTAURANT_INFO_SAVE_VALIDATION_ERROR,
+    RESTAURANT_INFO_SAVE_FAIL,
+    RESTAURANTS_RETRIEVED_BY_CITY_LOADING,
     RESTAURANTS_RETRIEVED_BY_CITY_SUCCES,
-    RESTAURANTS_RETRIEVED_BY_CITY_FAIL,
-    RESTAURANTS_RETRIEVED_BY_CITY_LOADING 
-} from '../../actiontypes/index';
+    RESTAURANTS_RETRIEVED_BY_CITY_FAIL
+ } from '../../actiontypes/index'
 
 
 export const RestaurantListComponent = (props) => {
 
     useEffect(async () => {
-        try {
 
-            props.dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_LOADING });
-            
-            const result = await axios.post("http://localhost:8000/restaurant/location/all", {
-                City: props.customerLocation.city,
-                County: props.customerLocation.county,
-                accesToken: localStorage.getItem("ACCES_TOKEN"),
-                refreshToken: localStorage.getItem("REFRESH_TOKEN")
-            });
-            console.log(result, props.customerLocation)
+        props.dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_LOADING });
+       
+       const result = await getRestaurantsByCustomerLocation(props.customerLocation.city, props.customerLocation.county, props.dispatch);
+        if(result?.data.restaurantsByLocation.length > 0){
+        props.dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_SUCCES, payload: {
+            restaurantsRetrievedByCustomerLocationCityList: result.data.restaurantsByLocation
+        }});
 
-            props.dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_SUCCES, payload: {
-                restaurantsRetrievedByCustomerLocationCityList: result.data.restaurantsByLocation
-            }})
-
-        } catch (error) {
-            props.dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_FAIL, payload: {
-                restaurantsRetrievedByCityCustomerLocationError: {
-                    errorMessage: error.message
-                }
-            } });
-        }
+        localStorage.setItem("ACCES_TOKEN", result.data.accesToken);
+        localStorage.setItem("REFRESH_TOKEN", result.data.refreshToken);
+    }
       }, []);
 
     return (
         <div>
-            {
-                props.isRestaurantListRetrievedByCustomerLocation ?  props.restaurantsRetrievedByCustomerLocationCityList?.map(restaurant => <RestaurantListItemComponent name={restaurant.Name} key={restaurant.RestaurantId}/>) : 
-                <LoadingComponent/>
-            }
-            {
-                console.log(props)
-            }
+       
+            <div className="container-restaurant-list">
+                {
+                    !props.restaurantsRetrievedByCustomerLocationLoading  ?  props.restaurantsRetrievedByCustomerLocationCityList?.map(restaurant => <RestaurantListItemComponent name={restaurant.Name} key={restaurant.RestaurantId}/>) : 
+                    <LoadingComponent/>
+                }
+            </div>
         </div>
+       
     )
 }
 

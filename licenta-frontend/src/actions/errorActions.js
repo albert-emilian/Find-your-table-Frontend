@@ -1,3 +1,0 @@
-
-
-//check token & load user

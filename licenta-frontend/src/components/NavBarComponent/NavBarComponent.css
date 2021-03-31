@@ -1,0 +1,9 @@
+#button-navbar-container{
+    position: relative;
+    right: 50px;
+}
+
+#btn-navbar{
+    width: auto;
+    right: 500px;
+}
