@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { deleteInventoryItemsList } from '../../actions/inventoryActions'
 import { connect } from 'react-redux';
 import {
     INVENTORY_ITEM_DELETE_SUCCESS,
     INVENTORY_ITEM_DELETE_LOADING
 } from '../../actiontypes/index'
+import EditInventoryItemForm from '../EditInventoryItemForm/EditInventoryItemForm'
+import {
+    ACCESS_TOKEN,
+    REFRESH_TOKEN
+} from '../../helpers/constants'
 
 function InventoryItemComponent(props) {
 
+    const [renderEdit, setRenderEdit] = useState(false);
     const {Name, Description, UnitPrice, InventoryQuantity, InventoryItemId} = props.item;
+
+
 
     const handleDeleteButton = async () => {
 
@@ -24,12 +32,17 @@ function InventoryItemComponent(props) {
         props.dispatch({type: INVENTORY_ITEM_DELETE_SUCCESS, payload: { index: index }});
 
         
-        localStorage.setItem("ACCES_TOKEN",accesToken);
-        localStorage.setItem("REFRESH_TOKEN",refreshToken);    
+        localStorage.setItem(ACCESS_TOKEN,accesToken);
+        localStorage.setItem(REFRESH_TOKEN,refreshToken);    
     }
 
+    const handleEditButton = ()  => {
+            setRenderEdit(true);
+    }
 
-    
+    const closeEditForm = () => {
+            setRenderEdit(false);
+    }
 
     return (
         <div>
@@ -39,8 +52,13 @@ function InventoryItemComponent(props) {
                 UnitPrice: {UnitPrice}
                 InventoryQuantity: {InventoryQuantity}
             </label>
+            <div>
+            {
+                renderEdit ? <EditInventoryItemForm item = {props.item} closeEditForm = {closeEditForm}/> : null
+            }
+            </div>
             <button onClick={handleDeleteButton}>Delete</button>
-            <button >Edit</button>
+            <button onClick={handleEditButton}>Edit</button>
         </div>
     )
 }

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { saveRestaurantInfo } from '../../actions/restaurantActions'
 import { 
-    COUNTY,
-    CITY,
     DESCRIPTION,
     THEME,
     NAME,
@@ -43,16 +41,12 @@ import SelectComponent from '../SelectComponent/SelectComponent'
      }
 
     const handleSaveButton = async (evt) => {
-        evt.preventDefault();
+        evt.preventDefault();   
    
         
         const {name, city, county, phone, description, theme} = restaurantInfo;
-        const accesToken = localStorage.getItem("ACCES_TOKEN");
-        const refreshToken = localStorage.getItem("REFRESH_TOKEN");
-        console.log(props.loggedUser)
 
-
-         saveRestaurantInfo(accesToken, refreshToken, name, props.loggedUser.email, city, county, phone, description, theme, props.dispatch);
+         saveRestaurantInfo(name, props.loggedUser.email, city, county, phone, description, theme, props.dispatch);
     }
 
 

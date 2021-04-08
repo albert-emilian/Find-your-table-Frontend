@@ -4,13 +4,13 @@ import RestaurantListItemComponent from '../RestaurantListItemComponent/Restaura
 import LoadingComponent from '../LoadingComponent/LoadingComponent'
 import { getRestaurantsByCustomerLocation } from '../../actions/restaurantActions'
 import {
-    RESTAURANT_INFO_SAVE_SUCCES ,
-    RESTAURANT_INFO_SAVE_VALIDATION_ERROR,
-    RESTAURANT_INFO_SAVE_FAIL,
     RESTAURANTS_RETRIEVED_BY_CITY_LOADING,
-    RESTAURANTS_RETRIEVED_BY_CITY_SUCCES,
-    RESTAURANTS_RETRIEVED_BY_CITY_FAIL
+    RESTAURANTS_RETRIEVED_BY_CITY_SUCCES
  } from '../../actiontypes/index'
+import { 
+    ACCESS_TOKEN,
+    REFRESH_TOKEN
+} from '../../helpers/constants'
 
 
 export const RestaurantListComponent = (props) => {
@@ -25,8 +25,8 @@ export const RestaurantListComponent = (props) => {
             restaurantsRetrievedByCustomerLocationCityList: result.data.restaurantsByLocation
         }});
 
-        localStorage.setItem("ACCES_TOKEN", result.data.accesToken);
-        localStorage.setItem("REFRESH_TOKEN", result.data.refreshToken);
+        localStorage.setItem(ACCESS_TOKEN, result.data.accesToken);
+        localStorage.setItem(REFRESH_TOKEN, result.data.refreshToken);
     }
       }, []);
 

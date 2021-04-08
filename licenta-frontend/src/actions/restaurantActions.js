@@ -3,18 +3,21 @@ import {
     RESTAURANT_INFO_SAVE_SUCCES ,
     RESTAURANT_INFO_SAVE_VALIDATION_ERROR,
     RESTAURANT_INFO_SAVE_FAIL,
-    RESTAURANTS_RETRIEVED_BY_CITY_LOADING,
-    RESTAURANTS_RETRIEVED_BY_CITY_SUCCES,
     RESTAURANTS_RETRIEVED_BY_CITY_FAIL
  } from '../actiontypes/index'
 import restaurantInfoValidation from '../helpers/restaurantInfoValidation'
+import { 
+    DNS,
+    ACCESS_TOKEN,
+    REFRESH_TOKEN
+ } from '../helpers/constants'
 
- export const saveRestaurantInfo = async (accesToken, refreshToken, name, email, city, county, phone, description, theme, dispatch) => {
+ export const saveRestaurantInfo = async (name, email, city, county, phone, description, theme, dispatch) => {
 
     try {
         restaurantInfoValidation(name, city, county, phone, description, theme)
 
-        const result = await axios.post('http://localhost:8000/restaurant/create', {
+        const result = await axios.post(`${DNS}/restaurant/create`, {
             restaurant: {
                 Email: email,
                 Name: name, 
@@ -24,8 +27,8 @@ import restaurantInfoValidation from '../helpers/restaurantInfoValidation'
                 Theme: theme,
                 Phone: phone
             },
-            accesToken: accesToken,
-            refreshToken: refreshToken
+            accesToken: localStorage.getItem(ACCESS_TOKEN),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN)
         });
 
         dispatch({type: RESTAURANT_INFO_SAVE_SUCCES});
@@ -44,25 +47,22 @@ import restaurantInfoValidation from '../helpers/restaurantInfoValidation'
  export const getRestaurantsByCustomerLocation = async  (city, county, dispatch) =>{
 
     try {
-        console.log(city,county)
-        console.log({acces:localStorage.getItem("ACCES_TOKEN"),refresh: localStorage.getItem("REFRESH_TOKEN")})
-        const result = await axios.post("http://localhost:8000/restaurant/location/all", {
+       
+        const result = await axios.post(`${DNS}/restaurant/location/all`, {
             City: city,
             County: county,
-            accesToken: localStorage.getItem("ACCES_TOKEN"),
-            refreshToken: localStorage.getItem("REFRESH_TOKEN")
+            accesToken: localStorage.getItem(ACCESS_TOKEN),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN)
         });
 
        return result;
 
     } catch (error) {
-        console.log(error.response.data)
-       
-        // dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_FAIL, payload: {
-        //     restaurantsRetrievedByCityCustomerLocationError: {
-        //         errorMessage: error.message
-        //     }
-        // } });
+        dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_FAIL, payload: {
+            restaurantsRetrievedByCityCustomerLocationError: {
+                errorMessage: error.message
+            }
+        } });
     }
  }
 

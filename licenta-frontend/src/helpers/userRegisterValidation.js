@@ -17,6 +17,7 @@ const userValidation = (
     )
       errorArray.push ({inputName:"lastName", message: "Invalid Lastname"});
   
+
     if (
       validator.isEmpty(firstname) === true ||
       validator.isAlpha(firstname) === false

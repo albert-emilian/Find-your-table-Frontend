@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { 
     INVENTORY_LIST_LOADING,
-    INVENTORY_LIST_SUCCES,
-    INVENTORY_LIST_ERROR,
-    RENDER_ITEM_FORM,
-    CLOSE_ITEM_FORM,
-    CREATE_ITEM_VALIDATION_ERRORS,
-    CREATE_ITEM_ERROR,
-    CREATE_ITEM_SUCCES
+    INVENTORY_LIST_SUCCES
 } from '../../actiontypes/index';
 import { loadInventoryItemsList } from '../../actions/inventoryActions';
 import InventoryItemComponent from '../InventoryItemComponent/InventoryItemComponent'
-
+import AddInventoryForm from '../AddInventoryItemForm/AddInventoryItemForm'
+import {
+    REFRESH_TOKEN,
+    ACCESS_TOKEN
+} from '../../helpers/constants'
  
 
 export const RestaurantInventoryComponent = (props) => {
+
+    const [renderAddItem, setRenderAddItem] = useState(false);
 
     useEffect(async () => {
         props.dispatch({type: INVENTORY_LIST_LOADING});
@@ -27,11 +27,19 @@ export const RestaurantInventoryComponent = (props) => {
         if(result.inventoryItems)
             props.dispatch({type: INVENTORY_LIST_SUCCES, payload: { inventoryItemsList: inventoryItems }});
 
-       localStorage.setItem("ACCES_TOKEN",accesToken);
-       localStorage.setItem("REFRESH_TOKEN",refreshToken);
+       localStorage.setItem(ACCESS_TOKEN,accesToken);
+       localStorage.setItem(REFRESH_TOKEN,refreshToken);
 
      }, []);
 
+
+     const handleOpenAddItemFormButton= () => { 
+        setRenderAddItem(true)
+     }
+
+     const handleCloseAddItemFormButton = () => {
+        setRenderAddItem(false)
+     }
 
      
     
@@ -47,7 +55,10 @@ export const RestaurantInventoryComponent = (props) => {
                 props.isInventoryItemsListRetrieved ? props.inventoryItemsList.map(item => <InventoryItemComponent item = {item} key = {item.InventoryItemId}/>) 
                     : <p>Could not retrieve inventory list</p>
             }
-            <button onClick={handleAddItemButton} >Add item</button>
+            {
+                renderAddItem ? <AddInventoryForm closeForm= {handleCloseAddItemFormButton}/> : null
+            }
+            <button onClick={handleOpenAddItemFormButton} >Add item</button>
         </div>
     )
 }

@@ -4,14 +4,6 @@ import {
     CUSTOMER_LOCATION_LOADING
 } from '../actiontypes/index'
 
-/*
-    1. loading location
-    2. location loaded succes dispatch
-    3. loading getting restaurants by location
-    4. getting restaurants by location succes
-*/
-
-
 const initialState = {
     customerLocation: {
         city: "",

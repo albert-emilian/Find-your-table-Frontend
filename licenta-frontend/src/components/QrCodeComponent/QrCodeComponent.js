@@ -4,9 +4,6 @@ import './QrCodeComponent.css';
 
 
 function QrCodeComponent(props){
-
-    
-
 return (  
     <div className='popup'>  
      <div className='popup-inner'>  

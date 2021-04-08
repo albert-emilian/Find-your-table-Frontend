@@ -5,6 +5,7 @@ import { signOut } from '../../actions/authActions';
 import RestaurantFormComponent from '../RestaurantFormComponent/RestaurantFormComponent'
 import NavBarComponent from '../NavBarComponent/NavBarComponent'
 import RestaurantIventoryComponent from '../RestaurantInventoryComponent/RestaurantInventoryComponent';
+import RestaurantTablesComponent from '../RestaurantTablesComponent/RestaurantTablesComponent'
 export const AdministratorPageComponent = (props) => {
 
     const history = useHistory();
@@ -55,7 +56,7 @@ export const AdministratorPageComponent = (props) => {
                 renderInventory ? <RestaurantIventoryComponent/> : null
             }
             {
-                renderTables ? <h3>Tables</h3> : null
+                renderTables ? <RestaurantTablesComponent/> : null
             }
             
         </div>

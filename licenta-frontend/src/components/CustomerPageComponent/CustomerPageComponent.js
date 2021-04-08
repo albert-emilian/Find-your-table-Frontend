@@ -20,7 +20,6 @@ export const CustomerPageComponent = (props) => {
     const history = useHistory();
 
     useEffect(() => {
-        console.log({loggedUser:props.loggedUser,userId: props.userId})
         props.dispatch({type: RESTAURANT_LOGOUT_CLEAR});
         navigator.geolocation.getCurrentPosition(async (position)=> {
             props.dispatch({type: CUSTOMER_LOCATION_LOADING});
@@ -34,6 +33,8 @@ export const CustomerPageComponent = (props) => {
                 }});
           }, (error)=>{console.error(error)});
       }, []);
+
+      //TODO: Eroare locatie
 
     const handleSignOutClick = async() => {
         

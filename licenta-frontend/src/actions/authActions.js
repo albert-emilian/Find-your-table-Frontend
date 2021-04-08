@@ -11,6 +11,9 @@ import {
     LOGOUT_SUCCESS,
     RESTAURANT_LOGOUT_CLEAR
 } from "../actiontypes/index.js";
+import { 
+    DNS
+} from '../helpers/constants'
 
 import userRegisterValidation from '../helpers/userRegisterValidation';
 import userLoginValidation from '../helpers/userLoginValidation';
@@ -24,7 +27,7 @@ export const registerUser = async  (user,dispatch,entity) => {
 
         userRegisterValidation(email,password,firstName,lastName,phone,confirmPassword)
 
-        const result = await axios.post(`http://localhost:8000/${entity}/register`,{
+        const result = await axios.post(`${DNS}/${entity}/register`,{
            user:{
             Email: email,
             FirstName: firstName,
@@ -57,7 +60,7 @@ export const loginUser = async (user, dispatch,entity) => {
 
         userLoginValidation(email, password);
 
-        const result = await axios.post(`http://localhost:8000/${entity}/verifyCredentials`,{
+        const result = await axios.post(`${DNS}/${entity}/verifyCredentials`,{
            user:{
             Email: email,
             Password: password
@@ -96,12 +99,12 @@ export const twoFactorValidation = async (userId, token, entity,dispatch) => {
         twoFactorInputCodeValidation(token);
        
         if(entity === "customer"){
-            result = await axios.post(`http://localhost:8000/${entity}/login/twofactor`, {
+            result = await axios.post(`${DNS}/${entity}/login/twofactor`, {
                 customerId: userId,
                 token: token
             });
         }else if (entity === "administrator"){
-            result = await axios.post(`http://localhost:8000/${entity}/login/twofactor`, {
+            result = await axios.post(`${DNS}/${entity}/login/twofactor`, {
                 administratorId: userId,
                 token: token
             });

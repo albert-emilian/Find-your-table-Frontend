@@ -8,6 +8,11 @@ import {
     HIDE_TWO_FACTOR_FORM,
     TWO_FACTOR_VALIDATION_ERRORS,
 } from '../actiontypes/index'
+import { 
+    ACCESS_TOKEN,
+    REFRESH_TOKEN
+} from '../helpers/constants'
+
 
 const initialState = {
 
@@ -82,8 +87,8 @@ export default function(state = initialState, action){
             }; 
         
         case LOGIN_SUCCESS:
-            window.localStorage.setItem("ACCES_TOKEN", action.payload.accesToken);
-            window.localStorage.setItem("REFRESH_TOKEN", action.payload.refreshToken);
+            window.localStorage.setItem(ACCESS_TOKEN, action.payload.accesToken);
+            window.localStorage.setItem(REFRESH_TOKEN, action.payload.refreshToken);
             return {
                 ...state,
                 renderTwoFactorForm: false,
@@ -98,8 +103,8 @@ export default function(state = initialState, action){
             };
 
         case LOGOUT_SUCCESS:
-            localStorage.removeItem('REFRESH_TOKEN');
-            localStorage.removeItem('ACCES_TOKEN');
+            localStorage.removeItem(ACCESS_TOKEN);
+            localStorage.removeItem(REFRESH_TOKEN);
             return {
                 ...state,
                 loggedIn: false,

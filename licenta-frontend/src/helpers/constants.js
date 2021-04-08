@@ -9,4 +9,9 @@ export const CITY = "city";
 export const DESCRIPTION = "description";
 export const THEME = "theme";
 export const NAME = "name";
-
+export const UNIT_PRICE = "unitprice";
+export const QUANTITY = "quantity";
+export const REFRESH_TOKEN = "REFRESH_TOKEN";
+export const ACCESS_TOKEN = "ACESS_TOKEN";
+export const DNS = "http://localhost:8000";
+export const TABLE_SIZE = "TABLE_SIZE";
