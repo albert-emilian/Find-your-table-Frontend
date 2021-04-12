@@ -11,6 +11,7 @@ import {
     RESTAURANT_TABLE_LIST_SUCCESS,
     RESTAURANT_TABLE_LIST_LOADING,
     RESTAURANT_TABLE_LIST_FAIL,
+    SELECTED_TABLE_RESERVATION
 } from '../actiontypes/index'
 
 
@@ -58,7 +59,10 @@ const initialState = {
     reservationsTableError:{
         isError: false,
         errorMessage: ""
-    }
+    },
+
+    tableReservation: {}
+
 }
 
 export default function(state = initialState, action){
@@ -166,6 +170,12 @@ export default function(state = initialState, action){
             ...state,
             tableListLoading: true
         };
+
+    case SELECTED_TABLE_RESERVATION:
+        return {
+            ...state,
+            tableReservation: action.payload.table
+        }
 
     
     default: return state;

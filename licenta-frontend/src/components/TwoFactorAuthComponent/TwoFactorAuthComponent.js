@@ -6,8 +6,10 @@ import { twoFactorValidation } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
 import { 
     HIDE_TWO_FACTOR_FORM,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    EXISTING_RESERVATION
 } from '../../actiontypes/index'
+import { verifiyExistingActiveReservation } from '../../actions/reservationActions'
 
  function TwoFactorAuthComponent(props) {
 
@@ -33,25 +35,43 @@ import {
     const handleSignInButton = async () => {
         
         const entity = window.location.pathname.split('/')[2];
-        const data = await twoFactorValidation(props.userId, Object.values(code)[0], entity, props.dispatch);
+        let path = `/${entity}/page`;
+        const result = await twoFactorValidation(props.userId, Object.values(code)[0], entity, props.dispatch);
 
+       if(!result) return;
        
+       const {loggedUser, accesToken, refreshToken} = result;
 
-       if(!data) return;
+       props.dispatch({type: LOGIN_SUCCESS, payload: {
+        loggedUser: {
+            email: loggedUser.Email,
+            firstName: loggedUser.FirstName,
+            lastName: loggedUser.LastName,
+            role: loggedUser.Role,
+            
+        },
+        accesToken: accesToken,
+        refreshToken: refreshToken
+    }});
 
-        props.dispatch({type: LOGIN_SUCCESS, payload: {
-            loggedUser: {
-                email: data.loggedUser.Email,
-                firstName: data.loggedUser.FirstName,
-                lastName: data.loggedUser.LastName,
-                role: data.loggedUser.Role,
-                
-            },
-            accesToken: data.accesToken,
-            refreshToken: data.refreshToken
-        }})
+       if(entity === "customer"){
+
+        const existingReservation = await verifiyExistingActiveReservation(loggedUser.Email, props.dispatch);
+       
         
-        history.push(`/${entity}/page`);
+        if(existingReservation?.reservation.Active){
+            path = `/${entity}/page/restaurant/reservation`;
+
+           console.log(existingReservation)
+            props.dispatch({type: EXISTING_RESERVATION, payload: { 
+                order: existingReservation.order,
+                menu: existingReservation.menu,
+            }});
+            console.log(props)
+        }
+       }
+       
+       history.push(path);
     }
     
 
@@ -78,6 +98,7 @@ import {
 
 const mapStateToProps = (state) =>({
     userId: state.login.userId, 
+    order: state.reservationState.order,
     twoFactorLoginValidationError: state.login.twoFactorLoginValidationError,
     loggedIn: state.login.loggedIn
    

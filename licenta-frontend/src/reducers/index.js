@@ -6,6 +6,7 @@ import customerReducer from './customerReducer'
 import inventoryReducer from './restaurantInventoryReducer'
 import tablesReducer from './tablesReducer'
 import reservationReducer from './reservationReducer'
+import customerPageStateReducer from './customerPageStateReducer'
 
 export default combineReducers({
     registration: registrationReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     customerState: customerReducer,
     inventoryState: inventoryReducer,
     tablesState: tablesReducer,
-    reservationState: reservationReducer
+    reservationState: reservationReducer,
+    customerPageState: customerPageStateReducer
 });

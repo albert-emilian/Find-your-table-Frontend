@@ -3,7 +3,7 @@ import {
     RESTAURANT_INFO_SAVE_SUCCES ,
     RESTAURANT_INFO_SAVE_VALIDATION_ERROR,
     RESTAURANT_INFO_SAVE_FAIL,
-    RESTAURANTS_RETRIEVED_BY_CITY_FAIL
+    RESTAURANTS_RETRIEVED_BY_CITY_FAIL,
  } from '../actiontypes/index'
 import restaurantInfoValidation from '../helpers/restaurantInfoValidation'
 import { 
@@ -58,12 +58,14 @@ import {
        return result;
 
     } catch (error) {
+        if(error.response && error.response.data)
         dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_FAIL, payload: {
-            restaurantsRetrievedByCityCustomerLocationError: {
-                errorMessage: error.message
+            restaurantsRetrievedByCityCustomerLocationError:{
+                errorMessage: error.response.data.message
             }
         } });
     }
  }
+
 
  

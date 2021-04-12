@@ -14,8 +14,10 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/index'
 import ProtectedRoute from './components/ProtectedRoute'
-import CustomerPageComponent from './components/CustomerPageComponent/CustomerPageComponent'
-import AdministratorPageComponent from './components/AdministratorPageComponent/AdministratorPageComponent'
+import CustomerPageComponent from './components/Customer components/CustomerPageComponent/CustomerPageComponent'
+import AdministratorPageComponent from './components/Administrator components/AdministratorPageComponent/AdministratorPageComponent'
+import RestaurantComponent from './components/Customer components/Restaurant related components/RestaurantComponent/RestaurantComponent'
+import ReservationComponent from './components/Customer components/ReservationComponent/ReservationComponent'
 import './index.css'
 
 
@@ -43,6 +45,8 @@ ReactDOM.render(
                 </Route>
                 <ProtectedRoute exact path='/customer/page' component={CustomerPageComponent} entity={window.location.pathname.split('/')[1]} />
                 <ProtectedRoute exact path='/administrator/page' component={AdministratorPageComponent} entity={window.location.pathname.split('/')[1]}/>
+                <ProtectedRoute exact path='/customer/page/restaurant' component={RestaurantComponent} entity={window.location.pathname.split('/')[1]} />
+                <ProtectedRoute exact path='/customer/page/restaurant/reservation' component={ReservationComponent} entity={window.location.pathname.split('/')[1]} />
             </Switch>
           </Provider>
         </Router>

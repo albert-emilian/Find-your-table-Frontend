@@ -13,10 +13,10 @@ import {
 } from '../helpers/constants'
 import { tableValidation } from '../helpers/tableValidation';
 
-export const loadTableList = async (email, dispatch) => {
+export const loadTableList = async (email,entity, dispatch) => {
 
     try {
-        const result = await axios.post(`${DNS}/table/restaurant/all`, {
+        const result = await axios.post(`${DNS}/table/restaurant/${entity}/all`, {
             Email: email,
             accesToken: localStorage.getItem(ACCESS_TOKEN),
             refreshToken: localStorage.getItem(REFRESH_TOKEN)
@@ -66,7 +66,7 @@ export const addTable = async (table, email, dispatch) => {
     }
 };
 
-export const deleteRestaurantTable = async (tableId, dispatch) => {
+export const deleteRestaurantTable = async (tableId,dispatch) => {
     try {
 
         const result = await axios.post(`${DNS}/table/delete`, {

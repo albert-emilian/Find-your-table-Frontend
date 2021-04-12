@@ -1,0 +1,4 @@
+.restaurant-info-container{
+    display: grid;
+    place-items: center;
+}

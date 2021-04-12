@@ -70,7 +70,7 @@ const initialState = {
                 restaurantsRetrievedByCustomerLocationLoading: false,
                 restaurantsRetrievedByCityCustomerLocationError:{
                     isError: true,
-                    errorMessage: action.payload.restaurantsRetrievedByCityError.errorMessage
+                    errorMessage: action.payload.restaurantsRetrievedByCityCustomerLocationError.errorMessage
                 }
             };
 

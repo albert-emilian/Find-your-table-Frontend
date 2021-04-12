@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { 
     RESERVATIONS_TABLE_LIST_FAIL,
-    DELETE_RESERVATION_FAIL
+    DELETE_RESERVATION_FAIL,
+    EXISTING_RESERVATION_FAIL
 } from '../actiontypes/index';
 import { 
     DNS,
@@ -46,10 +47,60 @@ export const deleteReservation = async (reservationId, dispatch) => {
         return result.data;
         
     } catch (error) {
-        console.log(error.response)
         if(error.response && error.response.data)
         dispatch({type: DELETE_RESERVATION_FAIL, payload: { reservationDeleteFail: {
             isError: true,
+            errorMessage: error.response.data.message
+        }
+    }});
+    }
+}
+
+export const createReservation = async (reservation, dispatch, email, TableId) => {
+
+    try {
+        const {reservationHour, numberOfPersons} =  reservation;
+
+        const result = await axios.post(`${DNS}/reservation/order/create`, {
+            reservation: {
+                NumberOfPersons: numberOfPersons,
+                ReservationHour: reservationHour,
+                customerEmail: email,
+                tableId: TableId
+            },
+            accesToken: localStorage.getItem(ACCESS_TOKEN),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+        });
+        
+        return result.data;
+        
+    } catch (error) {
+        console.log(error.response.data)
+        if(error.response && error.response.data)
+        dispatch({type: DELETE_RESERVATION_FAIL, payload: { reservationDeleteFail: {
+            isError: true,
+            errorMessage: error.response.data.message
+        }
+    }});
+    }
+}
+
+export const verifiyExistingActiveReservation = async (email, dispatch) => {
+
+    try {
+
+        const result = await axios.post(`${DNS}/reservation/existing`,{
+            email: email,
+            accesToken: localStorage.getItem(ACCESS_TOKEN),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+        });
+
+        return result.data;
+        
+    } catch (error) {
+        console.log(error.response.data)
+        if(error.response && error.response.data)
+        dispatch({type: EXISTING_RESERVATION_FAIL, payload: { existingReservationError: {
             errorMessage: error.response.data.message
         }
     }});

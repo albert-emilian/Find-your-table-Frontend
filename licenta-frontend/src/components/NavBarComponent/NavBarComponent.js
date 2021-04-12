@@ -39,9 +39,6 @@ import './NavBarComponent.css'
         <Navbar bg="dark" variant="dark">
             <Navbar.Brand href="#home">Find your table!</Navbar.Brand>
             <Nav className="mr-auto">
-                <Nav.Link href="#restaurants">Restaurants</Nav.Link>
-                <Nav.Link href="#reservation">Reservation</Nav.Link>
-                <Nav.Link href="#tables">Tables</Nav.Link>
             </Nav>
             <Form id="button-navbar-container">
                 <Button id="btn-navbar" bsStyle="primary" onClick={handleClicklSignOut} >Sign out</Button>
