@@ -11,7 +11,13 @@ import {
     CREATE_RESERVATION_FAIL,
     EXISTING_RESERVATION,
     EXISTING_RESERVATION_FAIL,
-    ADD_ORDER_ITEM
+    ADD_ORDER_ITEM,
+    ADD_ORDER_ITEM_FAIL,
+    DELETE_ORDER_ITEM_FAIL,
+    DELETE_ORDER_ITEM_SUCCESS,
+    CUSTOMER_DELETE_RESERVATION_FAIL,
+    RESERVATION_DELETE_HOUR_ERROR,
+    RESERVATION_DELETE_SUCCESS
 } from '../actiontypes/index'
 
 
@@ -37,10 +43,27 @@ const initialState = {
     },
 
     foundReservation: false,
+    reservation: {},
     order: {},
     menu: [],
     orderItems: [],
     existingReservationError: {
+        isError: false,
+        errorMessage: ""
+    },
+    orderItemAddFail: {
+        isError: false,
+        errorMessage: ""
+    },
+    orderItemDeleteFail: {
+        isError: false,
+        errorMessage: ""
+    },
+    deleteReservationHourError: {
+        isError: false,
+        errorMessagee: ""
+    },
+    customerDeleteReservationFail: {
         isError: false,
         errorMessage: ""
     }
@@ -100,6 +123,7 @@ export default function(state = initialState, action){
         case CREATE_RESERVATION_SUCCESS:
             return {
                 ...state,
+                reservation: action.payload.reservation,
                 order: action.payload.order,
                 menu: action.payload.menu,
                 reservationCreated: true,
@@ -125,8 +149,10 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 foundReservation: true,
+                reservation: action.payload.reservation,
                 order: action.payload.order,
-                menu: action.payload.menu
+                menu: action.payload.menu,
+                orderItems: action.payload.orderItems
             }
 
         case EXISTING_RESERVATION_FAIL:
@@ -138,12 +164,69 @@ export default function(state = initialState, action){
                 }
             }
 
-        case ADD_ORDER_ITEM:{
+        case ADD_ORDER_ITEM:
             return {
                 ...state,
-                orderItems: [...state.orderItems, action.payload.item]
+                orderItems: [...state.orderItems, action.payload.item],
+                order: action.payload.updatedOrder
             }
-        }
+        
+
+        case ADD_ORDER_ITEM_FAIL:
+            return {
+                ...state,
+                orderItemAddFail: {
+                    isError: true,
+                    errorMessage: action.payload.orderItemAddFail.errorMessage
+                }
+            }
+        
+
+        case DELETE_ORDER_ITEM_SUCCESS:
+            return {
+                ...state,
+                order: action.payload.updatedOrder,
+                orderItems:   state.orderItems.filter( (item, index) => index !== action.payload.index)
+            }
+
+        case DELETE_ORDER_ITEM_FAIL:
+            return {
+                ...state,
+                orderItemDeleteFail: {
+                    isError: true,
+                    errorMessage: action.payload.orderItemDeleteFail.errorMessage
+                }
+            }
+
+        case RESERVATION_DELETE_HOUR_ERROR:
+            return {
+                ...state,
+                deleteReservationHourError: {
+                    isError: true,
+                    errorMessage: action.payload.deleteReservationHourError.errorMessage
+                }
+            }
+
+        case RESERVATION_DELETE_SUCCESS: 
+            return{
+                ...state,
+                reservation: {},
+                order: {},
+                menu: [],
+                orderItems: [],
+                reservationCreated: false,
+                reservationCreateLoading: false,
+            }
+
+        case CUSTOMER_DELETE_RESERVATION_FAIL:
+            return {
+                ...state,
+                customerDeleteReservationFail: {
+                    isError: true,
+                    errorMessage: action.payload.customerDeleteReservationFail.errorMessage
+                }
+            }
+        
 
         default: return state;
     }

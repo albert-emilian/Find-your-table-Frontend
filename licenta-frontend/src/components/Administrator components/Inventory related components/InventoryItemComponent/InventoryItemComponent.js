@@ -24,6 +24,8 @@ function InventoryItemComponent(props) {
 
         const result = await deleteInventoryItemsList(InventoryItemId, props.loggedUser.email, props.dispatch);
 
+        if(result){
+        
         const { accesToken, refreshToken } = result;
 
         const itemById = (element) => element.InventoryItemId === InventoryItemId;
@@ -33,7 +35,8 @@ function InventoryItemComponent(props) {
 
         
         localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN,refreshToken);    
+        localStorage.setItem(REFRESH_TOKEN,refreshToken); 
+        }
     }
 
     const handleEditButton = ()  => {

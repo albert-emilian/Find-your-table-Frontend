@@ -15,3 +15,4 @@ export const REFRESH_TOKEN = "REFRESH_TOKEN";
 export const ACCESS_TOKEN = "ACESS_TOKEN";
 export const DNS = "http://localhost:8000";
 export const TABLE_SIZE = "TABLE_SIZE";
+export const STRIPE_PUBLIC ="pk_test_51IRaPBIRjXOg2PLOUycey9MXM8ywPfkM9GRf6RbBqRrQp2mD9SfywWoAzS3yCrFhYwZqIU6bo0EQ6xv4E5FhZdak00RAewQZZK";

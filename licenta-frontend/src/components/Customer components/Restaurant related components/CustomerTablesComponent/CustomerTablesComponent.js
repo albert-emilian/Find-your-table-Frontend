@@ -89,9 +89,10 @@ export const CustomerTablesComponent = (props) => {
         
         if(result){
 
-        const {accesToken, refreshToken, order, menu} = result;
+        const {accesToken, refreshToken, order, menu, reservation} = result;
 
         props.dispatch({type: CREATE_RESERVATION_SUCCESS, payload: {
+            reservation: reservation,
             order: order,
             menu: menu
         }});

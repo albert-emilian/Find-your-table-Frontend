@@ -3,6 +3,11 @@ import { connect } from 'react-redux'
 import {
     ADD_ORDER_ITEM
 } from '../../../../actiontypes/index'
+import { addItemOrder } from '../../../../actions/orderActions'
+import {
+    ACCESS_TOKEN,
+    REFRESH_TOKEN
+} from '../../../../helpers/constants'
 
 const MenuItemComponent = (props) => {
 
@@ -23,14 +28,24 @@ const MenuItemComponent = (props) => {
             })
     }
 
-    const handleAddButton = () => {
+    const handleAddButton = async () => {
 
-        const { item } = props;
-        item["orderQuantity"] = quantity.count
+
+        const result = await addItemOrder(quantity.count, props.order.OrderId, props.item.InventoryItemId, props.dispatch)
+
+        if(result){
+
+        const {accesToken, refreshToken, orderItem, updatedOrder } = result;
+        
 
         props.dispatch({type: ADD_ORDER_ITEM, payload:{
-            item: props.item,
+            item: orderItem,
+            updatedOrder:updatedOrder
         }});
+
+        localStorage.setItem(ACCESS_TOKEN,accesToken);
+        localStorage.setItem(REFRESH_TOKEN,refreshToken)
+        }
     }
 
     return (
@@ -56,7 +71,7 @@ const MenuItemComponent = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    
+    order: state.reservationState.order
 })
 
 

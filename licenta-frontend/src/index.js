@@ -18,6 +18,7 @@ import CustomerPageComponent from './components/Customer components/CustomerPage
 import AdministratorPageComponent from './components/Administrator components/AdministratorPageComponent/AdministratorPageComponent'
 import RestaurantComponent from './components/Customer components/Restaurant related components/RestaurantComponent/RestaurantComponent'
 import ReservationComponent from './components/Customer components/ReservationComponent/ReservationComponent'
+import StripeComponent from "./components/Payment/StripeComponent/StripeComponent";
 import './index.css'
 
 
@@ -47,6 +48,7 @@ ReactDOM.render(
                 <ProtectedRoute exact path='/administrator/page' component={AdministratorPageComponent} entity={window.location.pathname.split('/')[1]}/>
                 <ProtectedRoute exact path='/customer/page/restaurant' component={RestaurantComponent} entity={window.location.pathname.split('/')[1]} />
                 <ProtectedRoute exact path='/customer/page/restaurant/reservation' component={ReservationComponent} entity={window.location.pathname.split('/')[1]} />
+                <ProtectedRoute exact path='/customer/page/restaurant/reservation/pay' component={StripeComponent} entity={window.location.pathname.split('/')[1]} />
             </Switch>
           </Provider>
         </Router>

@@ -57,22 +57,25 @@ import { verifiyExistingActiveReservation } from '../../actions/reservationActio
        if(entity === "customer"){
 
         const existingReservation = await verifiyExistingActiveReservation(loggedUser.Email, props.dispatch);
-       
         
-        if(existingReservation?.reservation.Active){
+        
+        if(existingReservation.found){
             path = `/${entity}/page/restaurant/reservation`;
-
-           console.log(existingReservation)
+           
             props.dispatch({type: EXISTING_RESERVATION, payload: { 
+                reservation: existingReservation.reservation,
                 order: existingReservation.order,
                 menu: existingReservation.menu,
+                orderItems: existingReservation.orderItems
             }});
-            console.log(props)
         }
        }
        
        history.push(path);
-    }
+ 
+       }
+    
+
     
 
     return (
@@ -104,4 +107,4 @@ const mapStateToProps = (state) =>({
    
 })
 
-export default connect(mapStateToProps)(TwoFactorAuthComponent);
+export default connect(mapStateToProps)(TwoFactorAuthComponent)

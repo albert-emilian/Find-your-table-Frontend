@@ -106,3 +106,26 @@ export const verifiyExistingActiveReservation = async (email, dispatch) => {
     }});
     }
 }
+
+export const cancelReservation = async  (reservationId, orderId, dispatch) => {
+    try {
+
+        const result = await axios.post(`${DNS}/reservation/customer/delete`, {
+            reservationId: reservationId,
+            orderId: orderId,
+            accesToken: localStorage.getItem(ACCESS_TOKEN),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+        });
+
+        return result.data;
+
+        
+    } catch (error) {
+        if(error.response && error.response.data)
+        dispatch({type: DELETE_RESERVATION_FAIL, payload: { customerDeleteReservationFail: {
+            errorMessage: error.response.data.message
+        }
+    }});
+    }
+    
+}

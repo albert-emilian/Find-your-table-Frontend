@@ -19,7 +19,6 @@ export const CustomerPageComponent = (props) => {
     const history = useHistory();
 
     
-    
 
     useEffect(() => {
         props.dispatch({type: RESTAURANT_LOGOUT_CLEAR});
@@ -37,6 +36,7 @@ export const CustomerPageComponent = (props) => {
       }, []);
 
 
+
     const handleSignOutClick = async() => {
         
         const entity = window.location.pathname.split('/')[1];
@@ -45,13 +45,14 @@ export const CustomerPageComponent = (props) => {
 
     return (
         <div className="container-customer-page">
-       
+        
              <NavBarComponent signOutCustomer={handleSignOutClick}/>
                 <div>
                 {
                      props.customerLocationLoading ? <LoadingComponent/> :  <RestaurantListComponent/>
                 }
                 </div>
+                
             <div>  
             </div>
         </div>

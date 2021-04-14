@@ -124,6 +124,7 @@ export const twoFactorValidation = async (userId, token, entity,dispatch) => {
        };
         
     } catch (error) {
+        console.log(error.response.data)
     if(error.errorMessage)
     dispatch({type: TWO_FACTOR_VALIDATION_ERRORS, payload: {twoFactorLoginValidationError: error.errorMessage}});
     
