@@ -7,6 +7,7 @@ import {
     DISPLAY_TWO_FACTOR_FORM,
     HIDE_TWO_FACTOR_FORM,
     TWO_FACTOR_VALIDATION_ERRORS,
+    RECUPERATION_FAIL
 } from '../actiontypes/index'
 import { 
     ACCESS_TOKEN,
@@ -34,6 +35,12 @@ const initialState = {
     renderTwoFactorForm: false,
     userId: "",
     twoFactorLoginValidationError: "",
+
+    recuperationFail:{
+        isError: false,
+        errorMessage: ""
+    } 
+
 }
 
 export default function(state = initialState, action){
@@ -115,6 +122,15 @@ export default function(state = initialState, action){
                     role: ""
                 }
             };
+
+        case RECUPERATION_FAIL:
+            return {
+                ...state,
+                recuperationFail:{
+                    isError: true,
+                    errorMessage: action.payload.recuperationFail.errorMessage
+                } 
+            }
 
         default: return state;
 

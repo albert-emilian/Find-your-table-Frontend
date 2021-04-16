@@ -12,10 +12,12 @@ import {
     REFRESH_TOKEN
  } from '../helpers/constants'
 
- export const saveRestaurantInfo = async (name, email, city, county, phone, description, theme, dispatch) => {
+ export const saveRestaurantInfo = async (name, email, city, street, number, county, phone, description, theme, dispatch) => {
 
     try {
-        restaurantInfoValidation(name, city, county, phone, description, theme)
+        restaurantInfoValidation(name, city, street, county, phone, description, theme)
+
+        console.log("ACTIONS", street)
 
         const result = await axios.post(`${DNS}/restaurant/create`, {
             restaurant: {
@@ -23,6 +25,8 @@ import {
                 Name: name, 
                 City: city,
                 County: county,
+                Street: street,
+                LocNumber: number,
                 Description: description,
                 Theme: theme,
                 Phone: phone

@@ -4,9 +4,18 @@ import  {
     Route,
     Link
   } from "react-router-dom";
+  import { useEffect } from 'react';
+  import { connect } from 'react-redux'
+  import {
+      HIDE_TWO_FACTOR_FORM
+  } from '../../actiontypes/index'
 import "./HomeComponent.css";
 
-function Home(){
+function Home(props){
+
+    useEffect(()=>{
+        props.dispatch({type: HIDE_TWO_FACTOR_FORM})
+    },[])
 
     return(
         <div>
@@ -19,4 +28,4 @@ function Home(){
 
 }
 
-export default Home;
+export default connect()(Home);

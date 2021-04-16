@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import NavBarComponent from '../../../NavBarComponent/NavBarComponent'
 import {signOut} from '../../../../actions/authActions';
@@ -6,9 +6,12 @@ import { useHistory } from "react-router-dom";
 import { loadTableList } from "../../../../actions/tablesActions";
 import LoadingComponent from '../../../LoadingComponent/LoadingComponent';
 import CustomerTableComponent from '../CustomerTablesComponent/CustomerTablesComponent'
+import GoogleMapsComponent from '../../../GoogleMapsComponent/GoogleMapsComponent'
+import Geocode from "react-geocode";
 import {
     ACCESS_TOKEN,
-    REFRESH_TOKEN
+    REFRESH_TOKEN,
+    COUNTRY
 } from '.././../../../helpers/constants';
 import { 
     RESTAURANT_TABLE_LIST_LOADING,
@@ -16,13 +19,37 @@ import {
 } from '../../../../actiontypes/index'
 import './RestaurantComponent.css'
 
+Geocode.setApiKey("AIzaSyDcnm2ORqQJhIRRlpV4yAgmGcspY4nZmEI");
+Geocode.setRegion("ro");
+
 export const RestaurantComponent = (props) => {
     
     const history = useHistory();
+    const [coordinates,setCoordinates] = useState({
+        lat: "",
+        lng: "",
+        coordsReady: false
+    })
 
-    const {Name, City, County, Phone, Description, Email, Theme} = props.restaurant;
+    const {Name, City, County, Street, LocNumber, Phone, Description, Email, Theme} = props.restaurant;
 
     useEffect(async () => {
+
+        Geocode.fromAddress(`${COUNTRY} ${County} ${City} ${Street} ${LocNumber}`).then(
+            (response) => {
+              const { lat, lng } = response.results[0].geometry.location;
+              console.log(lat, lng);
+              setCoordinates({
+                  lat: lat, 
+                  lng:lng,
+                  coordsReady: true
+              });
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+
 
         props.dispatch({type: RESTAURANT_TABLE_LIST_LOADING});
 
@@ -47,6 +74,10 @@ export const RestaurantComponent = (props) => {
         
         const entity = window.location.pathname.split('/')[1];
         await signOut(entity,props.dispatch,history)
+    }
+
+    const state = () => {
+        console.log(coordinates)
     }
     
     return (
@@ -75,7 +106,11 @@ export const RestaurantComponent = (props) => {
                     {
                         props.isTableListRetrieved ? props.tableList.length === 0 : <h4>"The restaurant did not expose any of it`s tables."</h4>
                     }
-                </div>          
+                    <div>
+                    {coordinates.coordsReady ? <GoogleMapsComponent lat={coordinates.lat} lng={coordinates.lng}/> : null}
+                    </div>
+                   
+                    </div>          
             </div>
         </div>
     )

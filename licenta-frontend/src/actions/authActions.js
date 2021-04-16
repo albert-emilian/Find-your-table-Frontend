@@ -9,7 +9,8 @@ import {
     DISPLAY_TWO_FACTOR_FORM,
     TWO_FACTOR_VALIDATION_ERRORS,
     LOGOUT_SUCCESS,
-    RESTAURANT_LOGOUT_CLEAR
+    RESTAURANT_LOGOUT_CLEAR,
+    RECUPERATION_FAIL
 } from "../actiontypes/index.js";
 import { 
     DNS
@@ -141,4 +142,21 @@ export const signOut = async (entity,dispatch,history) => {
     dispatch({type: RESTAURANT_LOGOUT_CLEAR});
 }
 
+export const lostVerification = async (entity, userId, dispatch) => {
+    try {
+    
+     const result = await axios.post(`${DNS}/${entity}/qr/recuperation`, {
+        userId: userId
+     });  
+
+     return result.data;
+
+    } catch (error) {
+        console.log(error.response)
+        if(error.response && error.response.data)
+    dispatch({type: RECUPERATION_FAIL, payload: {recuperationFail: {
+        errorMessage:  error.response.data.message
+    }}});
+    }
+}
 

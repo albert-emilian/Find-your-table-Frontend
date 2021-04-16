@@ -6,6 +6,7 @@ import {
     THEME,
     NAME,
     PHONE,
+    STREET
 
 } from '../../../../helpers/constants'
 import ErrorComponent from '../../../ErrorComponent/ErrorComponent';
@@ -19,8 +20,10 @@ import SelectComponent from '../../../SelectComponent/SelectComponent'
         phone: "",
         theme: "",
         description: "",
-        county: " ",
-        city: ""
+        county: "",
+        city: "",
+        street: "",
+        number: ""
     });
 
 
@@ -44,9 +47,9 @@ import SelectComponent from '../../../SelectComponent/SelectComponent'
         evt.preventDefault();   
    
         
-        const {name, city, county, phone, description, theme} = restaurantInfo;
+        const {name, city, county, street, number, phone, description, theme} = restaurantInfo;
 
-         saveRestaurantInfo(name, props.loggedUser.email, city, county, phone, description, theme, props.dispatch);
+         saveRestaurantInfo(name, props.loggedUser.email, city, street, number,  county, phone, description, theme, props.dispatch);
     }
 
 
@@ -84,6 +87,17 @@ import SelectComponent from '../../../SelectComponent/SelectComponent'
             
 
             <SelectComponent handleSelectCity={handleSelectCity} handleSelectCounty={handleSelectCounty} countyValue={restaurantInfo.county}/>
+
+            <div className="form-group">
+                <label>Street</label>
+                <textarea name="street" type="text"  className="form-control" placeholder="Street" onChange={handleChange} />
+                <div className="input-error">{renderError(props.restaurantInfoValidationErrors,STREET)}</div>
+            </div>
+
+            <div className="form-group">
+                <label>Number</label>
+                <input name="number" type="number" min="0" max="1000"  className="form-control" placeholder="Number" onChange={handleChange} />
+            </div>
 
             <div className="form-group">
                 <label>Theme</label>

@@ -2,7 +2,7 @@ import React from 'react';
 import './TwoFactorAuthComponent.css';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { twoFactorValidation } from '../../actions/authActions';
+import { twoFactorValidation, lostVerification  } from '../../actions/authActions';
 import { useHistory } from "react-router-dom";
 import { 
     HIDE_TWO_FACTOR_FORM,
@@ -11,7 +11,13 @@ import {
 } from '../../actiontypes/index'
 import { verifiyExistingActiveReservation } from '../../actions/reservationActions'
 
+
  function TwoFactorAuthComponent(props) {
+
+    const [renderRecuperationMessage,setRenderRecuperationMessage] = useState(false);
+    const [code, setCode] = useState({
+        code: ""
+    });
 
     const history = useHistory();
 
@@ -22,9 +28,7 @@ import { verifiyExistingActiveReservation } from '../../actions/reservationActio
           }
         });
 
-    const [code, setCode] = useState({
-        code: ""
-    });
+   
 
     const handleOnChange = (evt) => {
         setCode({
@@ -74,9 +78,22 @@ import { verifiyExistingActiveReservation } from '../../actions/reservationActio
        history.push(path);
  
        }
-    
 
-    
+       const handleCanelButton = async () => {
+           props.dispatch({type: HIDE_TWO_FACTOR_FORM});
+       }
+
+       const handleLostQrCod = async () => {
+
+        const entity = window.location.pathname.split('/')[2];
+
+        const result =  await lostVerification(entity, props.userId, props.dispatch);
+
+        if(result){
+            setRenderRecuperationMessage(true);
+        }
+
+       }
 
     return (
         <div className='popup-two-factor-auth'>  
@@ -86,11 +103,16 @@ import { verifiyExistingActiveReservation } from '../../actions/reservationActio
                 <label>
                     <input name="code" type="text" onChange={handleOnChange}></input>
                 </label>
-                <button onClick={handleSignInButton}>Sign in</button>  
+                <button onClick={handleSignInButton}>Sign in</button>
+                <button onClick={handleCanelButton}>Cancel</button>
+                <button onClick={handleLostQrCod}>Lost code</button>    
                 <div>
                     {
                         props.twoFactorLoginValidationError ? 
                             <p>{props.twoFactorLoginValidationError}</p> : null
+                    }
+                    {
+                        renderRecuperationMessage ? <p>An email has been sent to you! Check it out to get you code back!😁</p> : null
                     }
                 </div>
             </div>
@@ -103,7 +125,8 @@ const mapStateToProps = (state) =>({
     userId: state.login.userId, 
     order: state.reservationState.order,
     twoFactorLoginValidationError: state.login.twoFactorLoginValidationError,
-    loggedIn: state.login.loggedIn
+    loggedIn: state.login.loggedIn,
+    renderTwoFactorForm: state.login.renderTwoFactorForm
    
 })
 

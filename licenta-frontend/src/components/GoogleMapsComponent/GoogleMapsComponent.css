@@ -1,0 +1,4 @@
+.google-maps-container{
+    display: grid;
+    place-items: center;
+}

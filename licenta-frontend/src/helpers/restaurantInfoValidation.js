@@ -3,6 +3,7 @@ import validator from 'validator';
 const restaurantInfoValidation = (
     name,
     city,
+    street,
     county,
     phone,
     description,
@@ -26,6 +27,12 @@ const restaurantInfoValidation = (
     validator.isEmpty(city) == true 
     )
     errorArray.push ({inputName:"city", message: "City field cannot be empty"});
+   
+
+    if (
+      validator.isEmpty(street) == true 
+      )
+      errorArray.push ({inputName:"street", message: "Street field cannot be empty"});
 
     if (
     validator.isEmpty(county) == true 
