@@ -5,7 +5,9 @@ import {
     RESTAURANTS_RETRIEVED_BY_CITY_SUCCES,
     RESTAURANTS_RETRIEVED_BY_CITY_FAIL,
     RESTAURANTS_RETRIEVED_BY_CITY_LOADING,
-    RESTAURANT_LOGOUT_CLEAR
+    RESTAURANT_LOGOUT_CLEAR,
+    CHECK_EXISTING_RESTAURANT_SUCCESS,
+    CHECK_EXISTING_RESTAURANT_FAIL
 } from '../actiontypes/index'
 
 const initialState = {
@@ -23,6 +25,12 @@ const initialState = {
         isError: false,
         errorMessage: ""
     },
+
+    isRestaurantReady: false,
+    checkRestaurantFail: {
+        isError: false,
+        errorMessage: ""
+    }
  };
 
  export default function(state = initialState, action){
@@ -80,6 +88,22 @@ const initialState = {
                 restaurantsRetrievedByCustomerLocationCityList: [],
                 isRestaurantListRetrievedByCustomerLocation: false
             };
+
+        case CHECK_EXISTING_RESTAURANT_SUCCESS:
+            console.log("REDUCER", action.payload)
+            return {
+                ...state,
+                isRestaurantReady: action.payload.isRestaurantReady
+            };
+
+        case CHECK_EXISTING_RESTAURANT_FAIL:
+            return {
+                ...state,
+                checkRestaurantFail: {
+                    isError: true,
+                    errorMessage: action.payload.checkRestaurantFail.errorMessage
+                }
+            }
 
          default: return state;   
     }

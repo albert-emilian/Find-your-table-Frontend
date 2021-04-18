@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { deleteReservation } from '../../../../actions/reservationActions'
 import {
@@ -8,10 +8,12 @@ import {
 import { 
     DELETE_RESERVATION_SUCCESS
 } from '../../../../actiontypes/index'
+import OrderDetailsComponent from '../OrderDetailsComponent/OrderDetailsComponent'
 
  function ReservationComponent(props) {
     
-    const { ReservationId } = props.reservation
+    const { ReservationId, customerId } = props.reservation;
+    const [renderOrderDetails, setRenderOrderDetails] = useState(false);
 
     const handleDeleteReservation = async () => {
         const result = await deleteReservation(ReservationId, props.dispatch);
@@ -29,11 +31,24 @@ import {
         localStorage.setItem(REFRESH_TOKEN,refreshToken);    
         }
     }
+
+    const handleOrderDetails = () => {
+        setRenderOrderDetails(true)
+    }
+
+    const closeOrderDetails = () => {
+        setRenderOrderDetails(false)
+    }
   
     return (
         <div>
            {props.reservation.ReservationHour}
-            <button onClick={handleDeleteReservation}>DELETE</button>
+           <button onClick={handleDeleteReservation}>Delete</button>
+           {
+            renderOrderDetails ? <OrderDetailsComponent closeOrderDetails={closeOrderDetails}  customerId={customerId}/> : <button onClick={handleOrderDetails}>Order details</button>
+           }
+           
+            
         </div>
     )
 }

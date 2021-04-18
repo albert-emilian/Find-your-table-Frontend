@@ -4,6 +4,7 @@ import {
     RESTAURANT_INFO_SAVE_VALIDATION_ERROR,
     RESTAURANT_INFO_SAVE_FAIL,
     RESTAURANTS_RETRIEVED_BY_CITY_FAIL,
+    CHECK_EXISTING_RESTAURANT_FAIL
  } from '../actiontypes/index'
 import restaurantInfoValidation from '../helpers/restaurantInfoValidation'
 import { 
@@ -70,6 +71,30 @@ import {
         } });
     }
  }
+
+
+export const isRestaurantReady = async (administratorId, dispatch) => {
+    try {
+
+        const result = await axios.post(`${DNS}/restaurant/check`, {
+
+            administratorId: administratorId,
+            accesToken: localStorage.getItem(ACCESS_TOKEN),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+        });
+
+        return result.data;
+        
+    } catch (error) {
+        console.log(error.response.data)
+        if(error.response && error.response.data)
+        dispatch({type: CHECK_EXISTING_RESTAURANT_FAIL, payload: {
+            checkRestaurantFail:{
+                errorMessage: error.response.data.message
+            }
+        }});
+    }
+}
 
 
  

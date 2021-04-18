@@ -101,7 +101,7 @@ export const RestaurantComponent = (props) => {
                 </div>
                 <div className="restaurant-tables-list">
                     {
-                        props.isTableListRetrieved ? props.tableList.filter(table => table.Reserved === false).map(table =>  <CustomerTableComponent table={table} key={table.TableId}/>) : null
+                        props.isTableListRetrieved ? props.tableList.map(table =>  <CustomerTableComponent table={table} key={table.TableId}/>) : null
                     }
                     {
                         props.isTableListRetrieved ? props.tableList.length === 0 : <h4>"The restaurant did not expose any of it`s tables."</h4>
