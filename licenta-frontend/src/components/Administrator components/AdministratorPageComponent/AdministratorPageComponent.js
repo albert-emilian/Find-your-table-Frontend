@@ -21,12 +21,8 @@ export const AdministratorPageComponent = (props) => {
     const [renderInventory, setRenderInventory] = useState(false);
     const [renderTables, setRenderTables] = useState(false);
     const [renderRestaurantInfo,setRenderRestaurantInfo] = useState(false);
-    const restaurantNotExistingMessage = () => {
-        <div>
-            <p>You need to create your restaurant 👨‍🍳 profile before coming to this section!</p>
-            <p>Go to Restaurant Information tab for finishing the process✅</p>
-        </div>
-    }
+    const [renderRestaurantNotReadyMessage,setRenderRestaurantNotReadyMessage] = useState(false);
+  
 
     useEffect(() => {
 
@@ -38,11 +34,12 @@ export const AdministratorPageComponent = (props) => {
             if(result){
               
 
-                const { accesToken, refreshToken, isRestaurantReady } = result;
+                const { accesToken, refreshToken, isRestaurantReady, restaurantInfo } = result;
 
 
                 props.dispatch({type: CHECK_EXISTING_RESTAURANT_SUCCESS, payload: {
-                    isRestaurantReady: isRestaurantReady
+                    isRestaurantReady: isRestaurantReady,
+                    restaurantInfo: restaurantInfo
                 }});
 
 
@@ -67,20 +64,31 @@ export const AdministratorPageComponent = (props) => {
                 setRenderInventory(false)
                 setRenderTables(false)
                 setRenderRestaurantInfo(true)
+                setRenderRestaurantNotReadyMessage(false)
             }
                 
                  
             if(props.location.hash === "#inventory"){
-                setRenderInventory(true)
                 setRenderTables(false)
                 setRenderRestaurantInfo(false)
+                if(props.isRestaurantReady){
+                    setRenderInventory(true)
+                }else{
+                    setRenderRestaurantNotReadyMessage(true);
+                }
+
             } 
                
              
             if(props.location.hash === "#tables"){
                 setRenderInventory(false)
-                setRenderTables(true)
                 setRenderRestaurantInfo(false)
+                if(props.isRestaurantReady){
+                    setRenderTables(true)
+                }else{
+                    setRenderRestaurantNotReadyMessage(true);
+                }
+
             }
      })
 
@@ -88,13 +96,19 @@ export const AdministratorPageComponent = (props) => {
         <div>
             <NavBarComponent signOutAdministrator={handleSignOutClick}/>
             {
-                renderRestaurantInfo ? <RestaurantFormComponent/> : restaurantNotExistingMessage              
+                renderRestaurantInfo ? <RestaurantFormComponent/> : null          
             }
             {
-                props.isRestaurantReady && renderInventory ? <RestaurantIventoryComponent/> : restaurantNotExistingMessage
+              renderInventory ? <RestaurantIventoryComponent/> :  null
             }
             {
-                renderTables && props.isRestaurantReady ? <RestaurantTablesComponent/> : restaurantNotExistingMessage
+                renderRestaurantNotReadyMessage ?  <div>
+            <p>You need to create your restaurant 👨‍🍳 profile before coming to this section!</p>
+            <p>Go to Restaurant Information tab for finishing the process✅</p>
+        </div> : null
+            }
+            {
+                renderTables  ? <RestaurantTablesComponent/> :   null
             }
         </div>
     )

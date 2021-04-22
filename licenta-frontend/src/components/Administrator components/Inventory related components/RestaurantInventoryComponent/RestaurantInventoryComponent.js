@@ -21,15 +21,15 @@ export const RestaurantInventoryComponent = (props) => {
         props.dispatch({type: INVENTORY_LIST_LOADING});
     
         const result = await loadInventoryItemsList(props.dispatch, props.loggedUser.email);
-        
-        const { inventoryItems, accesToken, refreshToken } = result;
+        if(result){
+            const { inventoryItems, accesToken, refreshToken } = result;
 
         if(result.inventoryItems)
             props.dispatch({type: INVENTORY_LIST_SUCCES, payload: { inventoryItemsList: inventoryItems }});
 
-       localStorage.setItem(ACCESS_TOKEN,accesToken);
-       localStorage.setItem(REFRESH_TOKEN,refreshToken);
-
+        localStorage.setItem(ACCESS_TOKEN,accesToken);
+        localStorage.setItem(REFRESH_TOKEN,refreshToken);
+        }
      }, []);
 
 

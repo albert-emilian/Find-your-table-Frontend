@@ -11,7 +11,7 @@ import { deleteOrderItem } from '../../../../actions/orderActions';
 
 const OrderItemComponent = (props) => {
 
-    const { OrderItemId, OrderQuantity } = props.item;
+    const { OrderItemId, OrderQuantity, inventoryItemId } = props.item;
      
 
     const handleRemoveItem = async () => {
@@ -21,12 +21,9 @@ const OrderItemComponent = (props) => {
         
         const { accesToken, refreshToken, updatedOrder } = result;
 
-        const itemById = (element) => element.OrderItemId === OrderItemId;
-        const index = props.orderItems.findIndex(itemById)
-        
        
         props.dispatch({type: DELETE_ORDER_ITEM_SUCCESS, payload: { 
-            index: index,
+            item: props.item,
             updatedOrder: updatedOrder
         }});
 
@@ -39,7 +36,7 @@ const OrderItemComponent = (props) => {
 
     return (
         <div>
-          AAAA
+         {props.menu.filter(item => item.InventoryItemId === inventoryItemId).map(item => item.Name)} x {OrderQuantity}
             <div>
                 <button onClick={handleRemoveItem}>Remove</button>
             </div>
@@ -49,7 +46,8 @@ const OrderItemComponent = (props) => {
 
 
 const mapStateToProps = (state) => ({
-    orderItems: state.reservationState.orderItems
+    orderItems: state.reservationState.orderItems,
+    menu: state.reservationState.menu
 })
 
 export default connect(mapStateToProps)(OrderItemComponent)

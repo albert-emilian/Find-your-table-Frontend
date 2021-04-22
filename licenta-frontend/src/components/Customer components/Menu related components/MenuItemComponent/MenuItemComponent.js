@@ -31,12 +31,13 @@ const MenuItemComponent = (props) => {
     const handleAddButton = async () => {
 
 
-        const result = await addItemOrder(quantity.count, props.order.OrderId, props.item.InventoryItemId, props.dispatch)
+        const result = await addItemOrder(props.reservation.ReservationHour,quantity.count, props.order.OrderId, props.item.InventoryItemId, props.dispatch)
 
         if(result){
 
         const {accesToken, refreshToken, orderItem, updatedOrder } = result;
-        
+
+        console.log(orderItem)
 
         props.dispatch({type: ADD_ORDER_ITEM, payload:{
             item: orderItem,
@@ -71,7 +72,8 @@ const MenuItemComponent = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    order: state.reservationState.order
+    order: state.reservationState.order,
+    reservation: state.reservationState.reservation
 })
 
 

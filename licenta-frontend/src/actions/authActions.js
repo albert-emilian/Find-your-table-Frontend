@@ -43,6 +43,7 @@ export const registerUser = async  (user,dispatch,entity) => {
             }});
 
     } catch (error) {
+        console.log(error.response)
         if(error.validationErrors)
             dispatch({type: VALIDATION_ERROR, payload:{validationErrors: error.validationErrors}});
         

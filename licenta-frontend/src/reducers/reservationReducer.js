@@ -20,7 +20,8 @@ import {
     RESERVATION_DELETE_SUCCESS,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_LOADING,
-    ORDER_DETAILS_FAIL
+    ORDER_DETAILS_FAIL,
+    CUSTOMER_DELETE_RESERVATION_ITEM_FAIL
 } from '../actiontypes/index'
 
 
@@ -76,7 +77,8 @@ const initialState = {
     orderDetailsError: {
         isError: false,
         errorMessage: ""
-    }
+    },
+    
 
 
 }
@@ -177,9 +179,13 @@ export default function(state = initialState, action){
             }
 
         case ADD_ORDER_ITEM:
+            const indexAdd = state.menu.findIndex(item => item.InventoryItemId == action.payload.item.inventoryItemId)                                                                 
+            const newMenuAdd = [...state.menu];
+            newMenuAdd[indexAdd].InventoryQuantity--
             return {
                 ...state,
                 orderItems: [...state.orderItems, action.payload.item],
+                menu: newMenuAdd,
                 order: action.payload.updatedOrder
             }
         
@@ -195,10 +201,15 @@ export default function(state = initialState, action){
         
 
         case DELETE_ORDER_ITEM_SUCCESS:
+            const indexDelete = state.menu.findIndex(item => item.InventoryItemId == action.payload.item.inventoryItemId)                                                                 
+            const newMenuDelete = [...state.menu];
+            newMenuDelete[indexDelete].InventoryQuantity++
+            console.log(action.payload)
             return {
                 ...state,
                 order: action.payload.updatedOrder,
-                orderItems:   state.orderItems.filter( (item, index) => index !== action.payload.index)
+                menu: newMenuDelete,
+                orderItems:   state.orderItems.filter( (item, index) => index !== indexDelete)
             }
 
         case DELETE_ORDER_ITEM_FAIL:
@@ -260,6 +271,15 @@ export default function(state = initialState, action){
                     errorMessage: action.payload.orderDetailsError.errorMessage
                 }
             }
+
+        case CUSTOMER_DELETE_RESERVATION_ITEM_FAIL:
+                return {
+                    ...state,
+                    orderItemDeleteFail: {
+                        isError: true,
+                        errorMessage: action.payload.orderItemDeleteFail.errorMessage
+                    }
+                }
         
 
         default: return state;

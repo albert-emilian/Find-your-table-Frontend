@@ -2,7 +2,8 @@ import axios from 'axios';
 import { 
     ADD_ORDER_ITEM_FAIL,
     CUSTOMER_DELETE_RESERVATION_FAIL,
-    ORDER_DETAILS_FAIL
+    ORDER_DETAILS_FAIL,
+    CUSTOMER_DELETE_RESERVATION_ITEM_FAIL
 } from '../actiontypes/index';
 import itemValidation from '../helpers/itemValidation';
 import { 
@@ -12,7 +13,7 @@ import {
  } from '../helpers/constants'
 
 
-export const addItemOrder = async (orderQuantity, orderId, inventoryItemId, dispatch) => {
+export const addItemOrder = async (reservationHour,orderQuantity, orderId, inventoryItemId, dispatch) => {
     try {
 
         const result = await axios.post(`${DNS}/order/item/add`, {
@@ -20,7 +21,8 @@ export const addItemOrder = async (orderQuantity, orderId, inventoryItemId, disp
             orderItem :{
                 OrderQuantity: orderQuantity,
                 orderId: orderId,
-                inventoryItemId: inventoryItemId
+                inventoryItemId: inventoryItemId,
+                reservationHour: reservationHour
             },
             accesToken: localStorage.getItem(ACCESS_TOKEN),
             refreshToken: localStorage.getItem(REFRESH_TOKEN)
@@ -53,7 +55,7 @@ export const deleteOrderItem = async (orderItemId, dispatch) => {
 
     } catch (error) {
         console.log(error.response.data)
-        dispatch({type: CUSTOMER_DELETE_RESERVATION_FAIL, payload: { orderItemDeleteFail: {
+        dispatch({type: CUSTOMER_DELETE_RESERVATION_ITEM_FAIL, payload: { orderItemDeleteFail: {
             errorMessage: error.response.data.message
         }
     }});

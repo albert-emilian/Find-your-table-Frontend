@@ -11,8 +11,14 @@ export const MenuComponent = (props) => {
                 <h3>Menu</h3>
             </div>
             <div>
+            {
+                
+            }
                 {
                     props.menu.map(item => <MenuItemComponent item={item} key={item.InventoryItemId}/>)
+                }
+                {
+                    console.log(props.menu)
                 }
             </div>
         </div>

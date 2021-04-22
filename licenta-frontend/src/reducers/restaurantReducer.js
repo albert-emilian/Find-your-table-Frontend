@@ -7,7 +7,10 @@ import {
     RESTAURANTS_RETRIEVED_BY_CITY_LOADING,
     RESTAURANT_LOGOUT_CLEAR,
     CHECK_EXISTING_RESTAURANT_SUCCESS,
-    CHECK_EXISTING_RESTAURANT_FAIL
+    CHECK_EXISTING_RESTAURANT_FAIL,
+    OCCUPATION_INTERVAL_SUCCESS,
+    OCCUPATION_INTERVAL_LOADING,
+    OCCUPATION_INTERVAL_FAIL
 } from '../actiontypes/index'
 
 const initialState = {
@@ -26,11 +29,21 @@ const initialState = {
         errorMessage: ""
     },
 
+    restaurantInfo: {},
     isRestaurantReady: false,
     checkRestaurantFail: {
         isError: false,
         errorMessage: ""
+    },
+
+    occupationPerIntervals: {},
+    occupationPerIntervalsLoading: false,
+    occupationPerIntervalsError: {
+        isError: false,
+        errorMessage: ""
     }
+
+
  };
 
  export default function(state = initialState, action){
@@ -90,10 +103,10 @@ const initialState = {
             };
 
         case CHECK_EXISTING_RESTAURANT_SUCCESS:
-            console.log("REDUCER", action.payload)
             return {
                 ...state,
-                isRestaurantReady: action.payload.isRestaurantReady
+                isRestaurantReady: action.payload.isRestaurantReady,
+                restaurantInfo: action.payload.restaurantInfo
             };
 
         case CHECK_EXISTING_RESTAURANT_FAIL:
@@ -102,6 +115,29 @@ const initialState = {
                 checkRestaurantFail: {
                     isError: true,
                     errorMessage: action.payload.checkRestaurantFail.errorMessage
+                }
+            }
+
+        case OCCUPATION_INTERVAL_SUCCESS:
+            return {
+                ...state,
+                occupationPerIntervals: action.payload.occupationPerIntervals,
+                occupationPerIntervalsLoading: false
+            }
+        
+        case OCCUPATION_INTERVAL_LOADING: 
+            return {
+                ...state,
+                occupationPerIntervalsLoading: true
+            }
+        
+        case OCCUPATION_INTERVAL_FAIL: 
+            return {
+                ...state,
+                occupationPerIntervalsLoading: false,
+                occupationPerIntervalsError: {
+                    isError: true,
+                    errorMessage: action.payload.occupationPerIntervalsError.errorMessage
                 }
             }
 
