@@ -8,8 +8,8 @@ import { loadInventoryItemsList } from '../../../../actions/inventoryActions';
 import InventoryItemComponent from '../InventoryItemComponent/InventoryItemComponent'
 import AddInventoryForm from '../AddInventoryItemForm/AddInventoryItemForm'
 import {
-    REFRESH_TOKEN,
-    ACCESS_TOKEN
+    REFRESH_TOKEN_ADMINISTRATOR,
+    ACCESS_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
  
 
@@ -27,8 +27,8 @@ export const RestaurantInventoryComponent = (props) => {
         if(result.inventoryItems)
             props.dispatch({type: INVENTORY_LIST_SUCCES, payload: { inventoryItemsList: inventoryItems }});
 
-        localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN,refreshToken);
+        localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+        localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken);
         }
      }, []);
 

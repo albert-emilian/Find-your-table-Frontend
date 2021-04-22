@@ -11,8 +11,10 @@ import {
 import restaurantInfoValidation from '../helpers/restaurantInfoValidation'
 import { 
     DNS,
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR,
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
  } from '../helpers/constants'
 
  export const saveRestaurantInfo = async (name, email, city, street, number, county, phone, description, theme, dispatch, startingHour, finishingHour) => {
@@ -36,8 +38,8 @@ import {
                 StartingHour: startingHour,
                 FinishingHour: finishingHour
             },
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;
@@ -64,13 +66,14 @@ import {
         const result = await axios.post(`${DNS}/restaurant/location/all`, {
             City: city,
             County: county,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
         });
 
        return result;
 
     } catch (error) {
+        console.log(error.response.data)
         if(error.response && error.response.data)
         dispatch({type: RESTAURANTS_RETRIEVED_BY_CITY_FAIL, payload: {
             restaurantsRetrievedByCityCustomerLocationError:{
@@ -87,8 +90,8 @@ export const isRestaurantReady = async (administratorId, dispatch) => {
         const result = await axios.post(`${DNS}/restaurant/check`, {
 
             administratorId: administratorId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;
@@ -124,8 +127,8 @@ export const updateRestaurantInfo = async (name, email, city, street, number, co
                 StartingHour: startingHour,
                 FinishingHour: finishingHour
             },
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;
@@ -147,8 +150,8 @@ export const updateRestaurantInfo = async (name, email, city, street, number, co
 
         const result = await axios.post(`${DNS}/restaurant/occupation`,{
             restaurantId: restaurantId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
         });
 
         return result.data;

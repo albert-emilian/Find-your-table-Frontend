@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { deleteReservation } from '../../../../actions/reservationActions'
 import {
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants';
 import { 
     DELETE_RESERVATION_SUCCESS
@@ -27,8 +27,8 @@ import OrderDetailsComponent from '../OrderDetailsComponent/OrderDetailsComponen
         props.dispatch({type: DELETE_RESERVATION_SUCCESS, payload: { index: index }});
 
         
-        localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN,refreshToken);    
+        localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+        localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken);    
         }
     }
 

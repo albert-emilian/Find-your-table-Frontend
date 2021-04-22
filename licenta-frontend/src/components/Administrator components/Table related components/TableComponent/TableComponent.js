@@ -6,8 +6,8 @@ import {
     RESERVATIONS_TABLE_LIST_CLEAR,
 } from '../../../../actiontypes/index';
 import {
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants';
 import { deleteRestaurantTable } from '../../../../actions/tablesActions'
 import { loadReservationsList } from '../../../../actions/reservationActions'
@@ -35,8 +35,8 @@ function TableComponent(props) {
         props.dispatch({type: DELETE_RESTAURANT_TABLE_SUCCESS, payload: { index: index }});
 
         
-        localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN,refreshToken);    
+        localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+        localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken);    
     };
 
     const handleEditButton = ()  => {
@@ -57,8 +57,8 @@ function TableComponent(props) {
         
                 props.dispatch({type: RESERVATIONS_TABLE_LIST_SUCCESS, payload: { reservationsList: reservationsList }});
             
-                localStorage.setItem(ACCESS_TOKEN,accesToken);
-                localStorage.setItem(REFRESH_TOKEN,refreshToken);  
+                localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+                localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken);  
                 console.log("aa")
             }
     }

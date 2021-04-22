@@ -8,8 +8,10 @@ import {
 import itemValidation from '../helpers/itemValidation';
 import { 
     DNS,
-    ACCESS_TOKEN,
-    REFRESH_TOKEN,
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER,
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR,
  } from '../helpers/constants'
 
 
@@ -24,8 +26,8 @@ export const addItemOrder = async (reservationHour,orderQuantity, orderId, inven
                 inventoryItemId: inventoryItemId,
                 reservationHour: reservationHour
             },
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
         });
 
         return result.data;
@@ -47,8 +49,8 @@ export const deleteOrderItem = async (orderItemId, dispatch) => {
         
         const result = await axios.post(`${DNS}/order/item/delete`, {
             OrderItemId: orderItemId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
         });
 
         return result.data;
@@ -65,10 +67,10 @@ export const deleteOrderItem = async (orderItemId, dispatch) => {
 export const loadOrderDetails = async (customerId, dispatch) => {
     try {
 
-        const result = await axios.post(`${DNS}/order/customer`, {
+        const result = await axios.post(`${DNS}/order/administrator`, {
             customerId: customerId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;

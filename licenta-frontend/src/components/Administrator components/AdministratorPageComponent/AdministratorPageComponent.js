@@ -11,8 +11,8 @@ import {
     CHECK_EXISTING_RESTAURANT_SUCCESS
 } from '../../../actiontypes/index'
 import { 
-    ACCESS_TOKEN,
-    REFRESH_TOKEN,
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR,
 } from '../../../helpers/constants'
 export const AdministratorPageComponent = (props) => {
 
@@ -43,8 +43,8 @@ export const AdministratorPageComponent = (props) => {
                 }});
 
 
-                localStorage.setItem(ACCESS_TOKEN,accesToken);
-                localStorage.setItem(REFRESH_TOKEN,refreshToken);
+                localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+                localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken);
             }
         };
 

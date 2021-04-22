@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { 
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
 } from '../../../../helpers/constants'
 import { 
     SELECTED_TABLE_RESERVATION,
@@ -81,9 +81,7 @@ export const CustomerTablesComponent = (props) => {
     props.dispatch({type: CREATE_RESERVATION_LOADING});
 
     const { email } = props.loggedUser;
-    
-    console.log(props.loggedUser)
-    console.log(reservation)
+   
     
     const result = await createReservation(reservation, props.dispatch, email, TableId);
         
@@ -99,8 +97,8 @@ export const CustomerTablesComponent = (props) => {
         props.dispatch({type: SELECTED_TABLE_RESERVATION, payload:{table: props.table}});
         history.push(`/customer/page/restaurant/reservation`);
 
-        localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN,refreshToken);
+        localStorage.setItem(ACCESS_TOKEN_CUSTOMER,accesToken);
+        localStorage.setItem(REFRESH_TOKEN_CUSTOMER,refreshToken);
         }
        
     }

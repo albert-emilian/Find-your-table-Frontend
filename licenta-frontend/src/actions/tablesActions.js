@@ -8,19 +8,31 @@ import {
 } from '../actiontypes/index';
 import {
     DNS,
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR,
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
 } from '../helpers/constants'
 import { tableValidation } from '../helpers/tableValidation';
 
 export const loadTableList = async (email,entity, dispatch) => {
 
     try {
-        const result = await axios.post(`${DNS}/table/restaurant/${entity}/all`, {
-            Email: email,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
-        });
+        let result = null;
+        if(entity === "customer"){
+            result = await axios.post(`${DNS}/table/restaurant/${entity}/all`, {
+                Email: email,
+                accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+                refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
+            });
+        }else{
+            result = await axios.post(`${DNS}/table/restaurant/${entity}/all`, {
+                Email: email,
+                accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+                refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
+            });
+        }
+       
 
         return result.data;
         
@@ -46,8 +58,8 @@ export const addTable = async (table, email, dispatch) => {
             TableSize: tableSize,
             TableName: tableName,
             Email: email,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;
@@ -71,8 +83,8 @@ export const deleteRestaurantTable = async (tableId,dispatch) => {
 
         const result = await axios.post(`${DNS}/table/delete`, {
             TableId: tableId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;
@@ -99,8 +111,8 @@ export const updateRestaurantTable = async (table, dispatch) => {
             TableId: tableId,
             TableSize: tableSize,
             TableName: tableName,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;

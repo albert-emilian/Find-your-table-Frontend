@@ -6,8 +6,10 @@ import {
 } from '../actiontypes/index';
 import { 
     DNS,
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR,
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
 } from '../helpers/constants'
 
 
@@ -17,8 +19,8 @@ export const loadReservationsList = async (tableId, dispatch) => {
 
         const result = await axios.post(`${DNS}/reservation/table/all`, {
             tableId: tableId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;
@@ -39,8 +41,8 @@ export const deleteReservation = async (reservationId, dispatch) => {
     try {
         const result = await axios.post(`${DNS}/reservation/administrator/delete`, {
             ReservationId: reservationId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         
@@ -68,8 +70,8 @@ export const createReservation = async (reservation, dispatch, email, TableId) =
                 customerEmail: email,
                 tableId: TableId
             },
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
         });
         
         return result.data;
@@ -91,8 +93,8 @@ export const verifiyExistingActiveReservation = async (email, dispatch) => {
 
         const result = await axios.post(`${DNS}/reservation/existing`,{
             email: email,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
         });
 
         return result.data;
@@ -113,8 +115,8 @@ export const cancelReservation = async  (reservationId, orderId, dispatch) => {
         const result = await axios.post(`${DNS}/reservation/customer/delete`, {
             reservationId: reservationId,
             orderId: orderId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
         });
 
         return result.data;

@@ -6,8 +6,8 @@ import {
     UNIT_PRICE,
     QUANTITY,
     NAME,
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
 import { addInventoryItem } from '../../../../actions/inventoryActions'
 import "./AddInventoryItemForm.css"
@@ -42,8 +42,8 @@ export const AddInventoryItemForm = (props) => {
         if(result.inventoryItemsList){
             props.dispatch({type: ADD_INVENTORY_ITEM_SUCCESS, payload: { inventoryItemsList: inventoryItemsList}});
 
-            localStorage.setItem(ACCESS_TOKEN, accesToken);
-            localStorage.setItem(REFRESH_TOKEN,refreshToken)
+            localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR, accesToken);
+            localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken)
         }
     }
     

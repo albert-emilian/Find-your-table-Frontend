@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { UPDATE_RESTAURANT_TABLE_SUCCESS } from '../../../../actiontypes/index';
 import { 
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
 import { updateRestaurantTable } from '../../../../actions/tablesActions';
 
@@ -40,8 +40,8 @@ export const EditTableForm = (props) => {
             props.dispatch({type: UPDATE_RESTAURANT_TABLE_SUCCESS, payload: { updatedItem: updatedItem}});
 
 
-            localStorage.setItem(ACCESS_TOKEN, accesToken);
-            localStorage.setItem(REFRESH_TOKEN,refreshToken)
+            localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR, accesToken);
+            localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken)
         }
         }
     }

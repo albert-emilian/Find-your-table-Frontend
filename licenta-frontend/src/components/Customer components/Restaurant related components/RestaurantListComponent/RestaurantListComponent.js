@@ -8,8 +8,8 @@ import {
     RESTAURANTS_RETRIEVED_BY_CITY_SUCCES
  } from '../../../../actiontypes/index'
 import { 
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
 } from '../../../../helpers/constants'
 
 
@@ -27,8 +27,8 @@ export const RestaurantListComponent = (props) => {
             restaurantsRetrievedByCustomerLocationCityList: result.data.restaurantsByLocation
         }});
 
-        localStorage.setItem(ACCESS_TOKEN, result.data.accesToken);
-        localStorage.setItem(REFRESH_TOKEN, result.data.refreshToken);
+        localStorage.setItem(ACCESS_TOKEN_CUSTOMER, result.data.accesToken);
+        localStorage.setItem(REFRESH_TOKEN_CUSTOMER, result.data.refreshToken);
     }
       }, []);
 

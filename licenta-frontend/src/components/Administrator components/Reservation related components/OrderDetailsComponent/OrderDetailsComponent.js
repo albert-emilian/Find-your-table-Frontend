@@ -5,8 +5,8 @@ import {
     ORDER_DETAILS_LOADING
 } from '../../../../actiontypes/index'
 import {
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
 import {loadOrderDetails} from '../../../../actions/orderActions';
 import OrderDetailsItemComponent from '../OrderDetailsItemComponent/OrderDetailsItemComponent';
@@ -27,8 +27,8 @@ export const OrderDetailsComponent = (props) => {
             orderDetails: order
         }});
 
-        localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN, refreshToken);
+        localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+        localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR, refreshToken);
     }
 
 

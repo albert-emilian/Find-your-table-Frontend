@@ -4,8 +4,8 @@ import {
     DELETE_ORDER_ITEM_SUCCESS
 } from '../../../../actiontypes/index'
 import { 
-    REFRESH_TOKEN,
-    ACCESS_TOKEN
+    REFRESH_TOKEN_CUSTOMER,
+    ACCESS_TOKEN_CUSTOMER
 } from '../../../../helpers/constants'
 import { deleteOrderItem } from '../../../../actions/orderActions';
 
@@ -28,8 +28,8 @@ const OrderItemComponent = (props) => {
         }});
 
         
-        localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN,refreshToken); 
+        localStorage.setItem(ACCESS_TOKEN_CUSTOMER,accesToken);
+        localStorage.setItem(REFRESH_TOKEN_CUSTOMER,refreshToken); 
 
        }
     }

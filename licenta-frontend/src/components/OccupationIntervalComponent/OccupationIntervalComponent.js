@@ -5,16 +5,17 @@ import {
     OCCUPATION_INTERVAL_SUCCESS
 } from '../../actiontypes/index'
 import {
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
 } from '../../helpers/constants'
 
 const OccupationIntervalComponent = (props) => {
     
     const {restaurantId} = props;
 
-    useEffect(async ()=> {
 
+    useEffect(async ()=> {
+        console.log(restaurantId)
     const result = await loadOccupationInterval(restaurantId, props.dispatch);
 
 
@@ -25,8 +26,8 @@ const OccupationIntervalComponent = (props) => {
             occupationPerIntervals: occupationPerIntervals
         }});
 
-    localStorage.setItem(ACCESS_TOKEN,accesToken);
-    localStorage.setItem(REFRESH_TOKEN,refreshToken);
+    localStorage.setItem(ACCESS_TOKEN_CUSTOMER,accesToken);
+    localStorage.setItem(REFRESH_TOKEN_CUSTOMER,refreshToken);
     }
     }, [])
     

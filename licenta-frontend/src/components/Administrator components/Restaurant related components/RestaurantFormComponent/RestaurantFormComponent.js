@@ -7,8 +7,8 @@ import {
     NAME,
     PHONE,
     STREET,
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
 import {
     RESTAURANT_INFO_SAVE_SUCCES,
@@ -74,8 +74,8 @@ import TimePicker from 'react-bootstrap-time-picker';
                 restaurantInfo: restaurantInfo
             }});
 
-            localStorage.setItem(ACCESS_TOKEN,accesToken);
-            localStorage.setItem(REFRESH_TOKEN,refreshToken);
+            localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+            localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken);
         }
     }
 
@@ -129,8 +129,8 @@ import TimePicker from 'react-bootstrap-time-picker';
                 restaurantInfo: restaurantInfo
             }});
 
-            localStorage.setItem(ACCESS_TOKEN,accesToken);
-            localStorage.setItem(REFRESH_TOKEN,refreshToken);
+            localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+            localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken);
         }
     }
 

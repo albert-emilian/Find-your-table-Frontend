@@ -10,8 +10,10 @@ import {
     RECUPERATION_FAIL
 } from '../actiontypes/index'
 import { 
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR,
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
 } from '../helpers/constants'
 
 
@@ -93,9 +95,15 @@ export default function(state = initialState, action){
                 userId: ""
             }; 
         
-        case LOGIN_SUCCESS:
-            window.localStorage.setItem(ACCESS_TOKEN, action.payload.accesToken);
-            window.localStorage.setItem(REFRESH_TOKEN, action.payload.refreshToken);
+        case LOGIN_SUCCESS: 
+            if(action.payload.loggedUser.role === 'administrator'){
+                window.localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR, action.payload.accesToken);
+                window.localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR, action.payload.refreshToken);
+            }else {
+                window.localStorage.setItem(ACCESS_TOKEN_CUSTOMER, action.payload.accesToken);
+                window.localStorage.setItem(REFRESH_TOKEN_CUSTOMER, action.payload.refreshToken);
+            }
+          
             return {
                 ...state,
                 renderTwoFactorForm: false,
@@ -110,8 +118,14 @@ export default function(state = initialState, action){
             };
 
         case LOGOUT_SUCCESS:
-            localStorage.removeItem(ACCESS_TOKEN);
-            localStorage.removeItem(REFRESH_TOKEN);
+            if(state.loggedUser.role === "administrator"){
+                localStorage.removeItem(ACCESS_TOKEN_ADMINISTRATOR);
+                localStorage.removeItem(REFRESH_TOKEN_ADMINISTRATOR);
+            }else{
+                localStorage.removeItem(ACCESS_TOKEN_ADMINISTRATOR);
+                localStorage.removeItem(REFRESH_TOKEN_ADMINISTRATOR);
+            }
+          
             return {
                 ...state,
                 loggedIn: false,

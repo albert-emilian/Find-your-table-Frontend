@@ -7,8 +7,8 @@ import {
     RESERVATION_DELETE_SUCCESS
 } from '../../../../actiontypes/index';
 import {
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
 } from '../../../../helpers/constants'
 import { cancelReservation } from '../../../../actions/reservationActions';
 
@@ -41,8 +41,8 @@ const OrderComponent = (props) => {
        
         props.dispatch({type: RESERVATION_DELETE_SUCCESS});
 
-        localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN,refreshToken);
+        localStorage.setItem(ACCESS_TOKEN_CUSTOMER,accesToken);
+        localStorage.setItem(REFRESH_TOKEN_CUSTOMER,refreshToken);
 
         history.push('/customer/page');
     }

@@ -5,8 +5,8 @@ import { useHistory } from 'react-router-dom'
 import { connect } from "react-redux";
 import {
     DNS,
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER
 } from '../../../helpers/constants'
 import {
   RESERVATION_DELETE_SUCCESS
@@ -35,8 +35,8 @@ import {
             id: id,
             reservationId: props.reservation.ReservationId,
             orderId: props.order.OrderId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
           }
         );
 
@@ -45,8 +45,8 @@ import {
         
           const { accesToken, refreshToken} = response.data;
 
-          localStorage.setItem(ACCESS_TOKEN,accesToken);
-          localStorage.setItem(REFRESH_TOKEN,refreshToken);
+          localStorage.setItem(ACCESS_TOKEN_CUSTOMER,accesToken);
+          localStorage.setItem(REFRESH_TOKEN_CUSTOMER,refreshToken);
 
           props.dispatch({type: RESERVATION_DELETE_SUCCESS});
 

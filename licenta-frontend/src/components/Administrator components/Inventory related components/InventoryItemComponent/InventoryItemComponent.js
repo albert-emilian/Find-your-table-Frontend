@@ -7,8 +7,8 @@ import {
 } from '../../../../actiontypes/index'
 import EditInventoryItemForm from '../EditInventoryItemForm/EditInventoryItemForm'
 import {
-    ACCESS_TOKEN,
-    REFRESH_TOKEN
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
 
 function InventoryItemComponent(props) {
@@ -34,8 +34,8 @@ function InventoryItemComponent(props) {
         props.dispatch({type: INVENTORY_ITEM_DELETE_SUCCESS, payload: { index: index }});
 
         
-        localStorage.setItem(ACCESS_TOKEN,accesToken);
-        localStorage.setItem(REFRESH_TOKEN,refreshToken); 
+        localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR,accesToken);
+        localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken); 
         }
     }
 

@@ -10,8 +10,8 @@ import GoogleMapsComponent from '../../../GoogleMapsComponent/GoogleMapsComponen
 import OccupationIntervalComponent from '../../../OccupationIntervalComponent/OccupationIntervalComponent'
 import Geocode from "react-geocode";
 import {
-    ACCESS_TOKEN,
-    REFRESH_TOKEN,
+    ACCESS_TOKEN_CUSTOMER,
+    REFRESH_TOKEN_CUSTOMER,
     COUNTRY
 } from '.././../../../helpers/constants';
 import { 
@@ -68,8 +68,8 @@ export const RestaurantComponent = (props) => {
        
         props.dispatch({type: RESTAURANT_TABLE_LIST_SUCCESS, payload: { tableList: tableList }});
 
-       localStorage.setItem(ACCESS_TOKEN,accesToken);
-       localStorage.setItem(REFRESH_TOKEN,refreshToken);
+       localStorage.setItem(ACCESS_TOKEN_CUSTOMER,accesToken);
+       localStorage.setItem(REFRESH_TOKEN_CUSTOMER,refreshToken);
         }
 
        

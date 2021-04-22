@@ -4,8 +4,8 @@ import {
     CREATE_RESTAURANT_TABLE_SUCCESS
 } from '../../../../actiontypes/index';
 import {
-    ACCESS_TOKEN,
-    REFRESH_TOKEN,
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR,
     TABLE_SIZE
 } from '../../../../helpers/constants'
 import { addTable } from '../../../../actions/tablesActions'
@@ -39,8 +39,8 @@ export const AddTableForm = (props) => {
             if(result.tableList){
                 props.dispatch({type: CREATE_RESTAURANT_TABLE_SUCCESS, payload: { tableList: tableList}});
     
-                localStorage.setItem(ACCESS_TOKEN, accesToken);
-                localStorage.setItem(REFRESH_TOKEN,refreshToken)
+                localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR, accesToken);
+                localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken)
             }
         }
        

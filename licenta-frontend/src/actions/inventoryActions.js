@@ -10,8 +10,8 @@ import {
 import itemValidation from '../helpers/itemValidation';
 import { 
     DNS,
-    ACCESS_TOKEN,
-    REFRESH_TOKEN,
+    ACCESS_TOKEN_ADMINISTRATOR,
+    REFRESH_TOKEN_ADMINISTRATOR,
  } from '../helpers/constants'
 
 export const loadInventoryItemsList = async (dispatch, email) => {
@@ -19,8 +19,8 @@ export const loadInventoryItemsList = async (dispatch, email) => {
     try {
 
         const result = await axios.post(`${DNS}/inventory/all/administrator`, {
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN),
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR),
             Email: email
         });
 
@@ -43,8 +43,8 @@ export const deleteInventoryItemsList = async (itemId, dispatch) => {
         const result = await axios.delete(`${DNS}/inventory/item/delete`, {
         data:{
             InventoryItemId: itemId,
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         }
         });
 
@@ -76,8 +76,8 @@ export const addInventoryItem = async (item, email, dispatch) => {
             UnitPrice: unitprice,
             administratorEmail: email
           },
-            accesToken: localStorage.getItem(ACCESS_TOKEN),
-            refreshToken: localStorage.getItem(REFRESH_TOKEN)
+            accesToken: localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;
@@ -112,8 +112,8 @@ export const updateInventoryItem = async (item, inventoryItemId, dispatch) => {
                 "Description": description,
                 "InventoryQuantity": quantity
             },
-            "accesToken": localStorage.getItem(ACCESS_TOKEN),
-            "refreshToken":  localStorage.getItem(REFRESH_TOKEN)
+            "accesToken": localStorage.getItem(ACCESS_TOKEN_ADMINISTRATOR),
+            "refreshToken":  localStorage.getItem(REFRESH_TOKEN_ADMINISTRATOR)
         });
 
         return result.data;
