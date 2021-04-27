@@ -9,6 +9,8 @@ import {
     DELETE_RESERVATION_SUCCESS
 } from '../../../../actiontypes/index'
 import OrderDetailsComponent from '../OrderDetailsComponent/OrderDetailsComponent'
+import {Button} from 'react-bootstrap'
+import './ReservationComponent.css'
 
  function ReservationComponent(props) {
     
@@ -42,10 +44,12 @@ import OrderDetailsComponent from '../OrderDetailsComponent/OrderDetailsComponen
   
     return (
         <div>
-           {props.reservation.ReservationHour}
-           <button onClick={handleDeleteReservation}>Delete</button>
+           Reservation hour ⌛️: <span className="reservation-hour-info">{props.reservation.ReservationHour}</span>
+          {
+            renderOrderDetails ? null : <Button className="button-table-reservation" variant="outline-dark" onClick={handleDeleteReservation}>Delete</Button>
+          } 
            {
-            renderOrderDetails ? <OrderDetailsComponent closeOrderDetails={closeOrderDetails}  customerId={customerId}/> : <button onClick={handleOrderDetails}>Order details</button>
+            renderOrderDetails ? <OrderDetailsComponent closeOrderDetails={closeOrderDetails}  customerId={customerId}/> : <Button className="button-table-reservation" variant="outline-dark" onClick={handleOrderDetails}>Order details</Button>
            }
            
             

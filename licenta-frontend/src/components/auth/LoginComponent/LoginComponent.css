@@ -1,0 +1,82 @@
+.login-container{
+    display:grid;
+    grid-template-columns: repeat(2,100%);
+    grid-template-rows: repeat(2,100%);
+    justify-content: center;
+    align-items: center;
+    margin-left: 30%;
+    margin-right: 10%;
+}
+
+
+.form-login{
+    grid-column-start: 1;
+    grid-column-end: -1;
+    position: relative;
+    border-radius: 25px;
+    border: 2px solid black;
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 30%;
+    width: 65%;
+    overflow:hidden;
+}
+
+.form-login-title{
+    position: relative; /* or absolute */
+    top: 90%;
+    left: 50%;
+    width: 50%;
+    overflow:hidden;
+}
+
+.form-login-group {
+    position: relative; /* or absolute */
+    top: 70%;
+    left: 30%;
+    width: 50%;
+}
+
+.btn-login {
+    position: relative; /* or absolute */
+    top: 40%;
+    left: 40%;
+    width: 30%;
+    margin-top: 5%;
+  
+}
+
+.sign-up-message{
+    position: relative; /* or absolute */
+    top: 100%;
+    left: 38%;
+    width: 50%
+}
+
+.input-error-login-email{
+    color: red;
+    margin-left: 20%;
+    width: 110%;
+}
+
+.input-error-login-password{
+    color: red;
+    margin-left: 20%;
+    width: 110%;
+}
+
+#login-input-password{
+    position: relative;
+    left: 25%;
+}
+
+#login-input-email{
+    position: relative;
+    left: 25%;
+}
+
+.input-label{
+    position: relative;
+    left: 15%;
+}
+

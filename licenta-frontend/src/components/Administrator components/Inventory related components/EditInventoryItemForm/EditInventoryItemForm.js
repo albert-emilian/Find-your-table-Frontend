@@ -11,6 +11,7 @@ import {
 } from '../../../../helpers/constants'
 import { updateInventoryItem } from '../../../../actions/inventoryActions'
 import "./EditInventoryItemForm.css"
+import { Button } from 'react-bootstrap'
 
 export const EditInventoryItemForm = (props) => {
 
@@ -61,37 +62,38 @@ export const EditInventoryItemForm = (props) => {
 
         <div className='edit-item-form'>  
         <div className='edit-item-form-inner'> 
-        <div>
+        <h3 className="edit-item-form-title">Complete the fields with information about the item that you want to change!😊</h3>
+        <div className="edit-item-form-inputs">
          <label>
              Name
-             <input type="text" name="name" defaultValue={Name} onChange={handleChange}></input>
+             <input className="form-control edit-item-form-input-name " type="text" name="name" defaultValue={Name} onChange={handleChange}></input>
+             <p className="edit-input-error">{renderError(props.updateInventoryItemsValidationErrors,NAME)}</p>
          </label>  
-         <div className="input-error">{renderError(props.updateInventoryItemsValidationErrors,NAME) }</div>
          </div> 
-         <div>
-         <label >
-             Description
-             <textarea type="text" name="description" defaultValue={Description} onChange={handleChange}></textarea>
-         </label>  
-         <div className="input-error">{renderError(props.updateInventoryItemsValidationErrors,DESCRIPTION) }</div>
-         </div>
-         <div>
+         <div className="edit-item-form-inputs">
          <label >
              Unit price
-             <input type="text" name="unitprice" defaultValue={UnitPrice} onChange={handleChange}></input>
+             <input className="form-control edit-item-form-input-price " type="text" name="unitprice" defaultValue={UnitPrice} onChange={handleChange}></input>
+             <p className="edit-input-error">{renderError(props.updateInventoryItemsValidationErrors,UNIT_PRICE)}</p>
          </label>  
-         <div className="input-error">{renderError(props.updateInventoryItemsValidationErrors,UNIT_PRICE) }</div>
          </div>
-         <div>
+         <div className="edit-item-form-inputs">
          <label >
              Quantity
-             <input type="text" name="quantity" defaultValue={InventoryQuantity} onChange={handleChange}></input>
+             <input className="form-control edit-item-form-input-quantity " type="text" name="quantity" defaultValue={InventoryQuantity} onChange={handleChange}></input>
+             <p className="edit-input-error">{renderError(props.updateInventoryItemsValidationErrors,QUANTITY)}</p>
          </label>  
-         <div className="input-error">{renderError(props.updateInventoryItemsValidationErrors,QUANTITY) }</div>
+         </div>
+         <div className="edit-item-form-inputs">
+         <label >
+             Description
+             <p className="edit-input-error">{renderError(props.updateInventoryItemsValidationErrors,DESCRIPTION)}</p>
+             <textarea className="form-control edit-item-form-input-description " type="text" name="description" defaultValue={Description} onChange={handleChange}></textarea>
+         </label>  
          </div>
                <div className='close-edit-item-form'>
-               <button  onClick={handleCloseButton}>Close</button>  
-               <button onClick={handleSaveButton}>Save</button>
+               <Button variant="outline-dark"  onClick={handleCloseButton}>Close</Button>  
+               <Button  variant="outline-dark" onClick={handleSaveButton}>Save</Button>
                </div>
         </div>  
        </div>  

@@ -18,6 +18,7 @@ import {
 import ErrorComponent from '../../../ErrorComponent/ErrorComponent';
 import SelectComponent from '../../../SelectComponent/SelectComponent'
 import TimePicker from 'react-bootstrap-time-picker';
+import './RestaurantFormComponent.css'
 
  function RestaurantFormComponent(props) {
 
@@ -143,56 +144,57 @@ import TimePicker from 'react-bootstrap-time-picker';
 
 
     return (
-    <div>
+    <div className="container-form">
         <form className="form-restaurant">
-            <h3 className="component-title">Restaurant information</h3>
+            <h3 className="component-title">Restaurant information 👨‍🍳</h3>
             <div className="form-group">
                 <label>Restaurant name</label>
-                <input name="name" type="text" className="form-control" placeholder="Name" defaultValue={restaurantInfo.name} onChange={handleChange}/>
+                <input name="name" type="text" id="restaurant-input-name" className="form-control" placeholder="Name" defaultValue={restaurantInfo.name} onChange={handleChange}/>
                <div className="input-error">{renderError(props.restaurantInfoValidationErrors,NAME)}</div>
             </div>
               
             <div className="form-group">
                 <label>Phone</label>
-                <input name="phone" type="phone" className="form-control" placeholder="Enter restaurant`s phone number" defaultValue={restaurantInfo.phone} onChange={handleChange} />
+                <input name="phone" type="phone" id="restaurant-input-phone" className="form-control" placeholder="Enter restaurant`s phone number" defaultValue={restaurantInfo.phone} onChange={handleChange} />
                 <div className="input-error">{renderError(props.restaurantInfoValidationErrors,PHONE)}</div>
             </div>
-
-            <SelectComponent handleSelectCity={handleSelectCity} handleSelectCounty={handleSelectCounty} defaultValue={restaurantInfo.city} countyValue={restaurantInfo.county}/>
-
+            <div >
+            <SelectComponent className="select-location" id="restaurant-input-location" handleSelectCity={handleSelectCity} handleSelectCounty={handleSelectCounty} defaultValue={restaurantInfo.city} countyValue={restaurantInfo.county}/>
+            </div>
             <div className="form-group">
                 <label>Street</label>
-                <textarea name="street" type="text"  className="form-control" placeholder="Street" defaultValue={restaurantInfo.street} onChange={handleChange} />
+                <textarea name="street" type="text" id="restaurant-input-street"  className="form-control" placeholder="Street" defaultValue={restaurantInfo.street} onChange={handleChange} />
                 <div className="input-error">{renderError(props.restaurantInfoValidationErrors,STREET)}</div>
             </div>
 
             <div className="form-group">
                 <label>Number</label>
-                <input name="number" type="number" min="0" max="1000"  className="form-control" placeholder="Number" defaultValue={restaurantInfo.number} onChange={handleChange} />
+                <input name="number" type="number" min="0" max="1000" id="restaurant-input-number"  className="form-control" placeholder="Number" defaultValue={restaurantInfo.number} onChange={handleChange} />
             </div>
 
             <div className="form-group">
                 <label>Theme</label>
-                <textarea name="theme" type="text" className="form-control" placeholder="Theme" defaultValue={restaurantInfo.theme} onChange={handleChange} />
+                <textarea name="theme" type="text" id="restaurant-input-theme" className="form-control" placeholder="Theme" defaultValue={restaurantInfo.theme} onChange={handleChange} />
                 <div className="input-error">{renderError(props.restaurantInfoValidationErrors,THEME)}</div>
             </div>
 
             <div className="form-group">
                 <label>Description</label>
-                <textarea name="description" type="text" className="form-control" placeholder="Description" defaultValue={restaurantInfo.description} onChange={handleChange} />
+                <textarea name="description" type="text" id="restaurant-input-description" className="form-control" placeholder="Description" defaultValue={restaurantInfo.description} onChange={handleChange} />
                 <div className="input-error">{renderError(props.restaurantInfoValidationErrors,DESCRIPTION)}</div>
             </div>
-            <label className="form-group">
-                Schedule
-                Begining: <TimePicker value={restaurantInfo.startingHour}  start="00:00" end="23:00" step={60} defaultValue={restaurantInfo.startingHour} onChange={handleTimeChangeStarting} />
-                End: <TimePicker value={restaurantInfo.finishingHour}  start="00:00" end="23:00" step={60} defaultValue={restaurantInfo.finishingHour} onChange={handleTimeChangeFinishing} />
-            </label>
+            <div className="form-group" >
+               
+                
+                Program start: <TimePicker id="restaurant-input-time-start" className="form-group" value={restaurantInfo.startingHour}  start="00:00" end="23:00" step={60} defaultValue={restaurantInfo.startingHour} onChange={handleTimeChangeStarting} />
+                Program end: <TimePicker id="restaurant-input-time-end" className="form-group" value={restaurantInfo.finishingHour}  start="00:00" end="23:00" step={60} defaultValue={restaurantInfo.finishingHour} onChange={handleTimeChangeFinishing} />
+            </div>
            
             <div>{ props.restaurantInfoFail.isError ? <ErrorComponent errorMessage={props.restaurantInfoFail.errorMessage}/> : null}</div>
             <div>{ props.restaurantInfoSaved ? "The information about your restaurant has been saved, now the customers can see your restaurant in the app" : null} </div>
            {
-            props.isRestaurantReady ? <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleUpdateButton} >Update</button> :
-             <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleSaveButton} >Save</button>
+            props.isRestaurantReady ? <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleUpdateButton} >Update✓</button> :
+             <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleSaveButton} >Save✓</button>
            } 
         </form>
     </div>

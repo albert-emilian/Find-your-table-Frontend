@@ -1,46 +1,93 @@
-.form-sign-up{
+.container-form{
     position: relative;
-    border-radius: 25px;
+    text-align: center;
+    align-items: center;
+    margin-top: 10%;
+    top: 60%;
     border: 2px solid black;
-    padding: 20px; 
-    margin: auto;
-    width: 600px;
-   
+    border-radius: 20px;  
+    width: 70%;
+    left: 20%;
+    overflow: hidden;
 }
 
 .component-title{
-    position: relative; /* or absolute */
-    top: 70%;
-    left: 50%;
+    position: relative;
+    left: 25%;
+}
+
+/* .form-group{
+    position: relative;
+    right: 20%;
+} */
+
+.container-select{
+    position: relative;
+    left: 9%;
+    width: 60%;
+}
+
+.btn{
     width: 50%;
+    left: 28%;
 }
 
-.form-group {
-    position: relative; /* or absolute */
-    top: 70%;
-    left: 30%;
-    width: 50%;
+#restaurant-input-name{
+    position: relative;
+    width: 100%;
+    left: -5%; 
 }
 
-.btn {
-    position: relative; /* or absolute */
-    top: 35%;
-    left: 40%;
-    width: 30%
+#restaurant-input-phone{
+    position: relative;
+    width: 100%;
+    left: -5%; 
 }
 
-.forgot-password{
-    position: relative; /* or absolute */
-    top: 35%;
-    left: 32%;
-    width: 30%
+#restaurant-input-street{
+    position: relative;
+    width: 100%;
+    left: -5%; 
 }
 
-.input-error{
-    position: relative; /* or absolute */
-    top: 50%;
-    left: 60%;
-    width: 50%;
-    height: 5px;
+#restaurant-input-phone{
+    position: relative;
+    width: 100%;
+    left: -5%; 
 }
 
+#restaurant-input-location{
+    position: relative;
+    width: 100%;
+    left: -5%; 
+}
+
+#restaurant-input-number{
+    position: relative;
+    width: 100%;
+    left: -5%; 
+}
+
+#restaurant-input-theme{
+    position: relative;
+    width: 100%;
+    left: -5%; 
+}
+
+#restaurant-input-description{
+    position: relative;
+    width: 100%;
+    left: -5%; 
+}
+
+#restaurant-input-time-start{
+    position: relative;
+    width: 100%;
+    left: -5%; 
+}
+
+#restaurant-input-time-end{
+    position: relative;
+    width: 100%;
+    left: -5%; 
+}

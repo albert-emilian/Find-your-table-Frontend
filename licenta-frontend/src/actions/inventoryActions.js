@@ -83,8 +83,11 @@ export const addInventoryItem = async (item, email, dispatch) => {
         return result.data;
         
     } catch (error) {
-        if(error.validationErrors)
-        dispatch({type: ADD_INVENTORY_ITEM_VALIDATION_ERROR, payload: { addInventoryItemsValidationErrors: error.validationErrors}});
+        if(error.validationErrors){
+            dispatch({type: ADD_INVENTORY_ITEM_VALIDATION_ERROR, payload: { addInventoryItemsValidationErrors: error.validationErrors}});
+            console.log(error)
+        }
+        
         
         if(error.response && error.response.data)
         dispatch({type: ADD_INVENTORY_ITEM_ERROR, payload: {addInventoryItemError:{

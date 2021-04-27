@@ -39,13 +39,13 @@ citiesNames.forEach(cityName =>{
     
     return (
         <div className="container-select">
-            <span className="select-county" >
+            <div className="select-county" >
             
                 <Select name="county" options={optionsCounty}  defaultInputValue= "County" onChange={handleOnchangeCounty}/>  
-            </span>
-            <span className="select-city">
+            </div>
+            <div className="select-city">
                 <Select defaultInputValue= "City" options={optionsCity} onChange={handleOnchangeCity} />  
-            </span>
+            </div>
         </div>
     )
 }

@@ -21,7 +21,8 @@ import {
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_LOADING,
     ORDER_DETAILS_FAIL,
-    CUSTOMER_DELETE_RESERVATION_ITEM_FAIL
+    CUSTOMER_DELETE_RESERVATION_ITEM_FAIL,
+    RESERVATIONS_TABLE_CUSTOMER_LIST_FAIL
 } from '../actiontypes/index'
 
 
@@ -78,6 +79,11 @@ const initialState = {
         isError: false,
         errorMessage: ""
     },
+
+    reservationsListTableCustomerError: {
+        isError: false,
+        errorMessage: ""
+    }
     
 
 
@@ -278,6 +284,15 @@ export default function(state = initialState, action){
                     orderItemDeleteFail: {
                         isError: true,
                         errorMessage: action.payload.orderItemDeleteFail.errorMessage
+                    }
+                }
+
+        case RESERVATIONS_TABLE_CUSTOMER_LIST_FAIL:
+                return {
+                    ...state,
+                    reservationsListTableCustomerError: {
+                        isError: true,
+                        errorMessage: action.payload.reservationsListTableCustomerError.errorMessage
                     }
                 }
         

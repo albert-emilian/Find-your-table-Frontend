@@ -6,6 +6,7 @@ import { registerUser } from '../../../actions/authActions'
 import QrCodeComponent from '../../QrCodeComponent/QrCodeComponent';
 import ReactDom from 'react-dom';
 import ErrorPopUpComponent from '../../ErrorComponent/ErrorComponent';
+import { Button } from 'react-bootstrap';
 import {
   FIRST_NAME,
   LAST_NAME,
@@ -74,6 +75,7 @@ function SignUp(props){
 
     return ReactDom.createPortal(
       <div>
+        <div className="container-register-form">
             <form className="form-sign-up">
                 <h3 className="component-title">Register</h3>
                 <div className="form-group">
@@ -113,11 +115,12 @@ function SignUp(props){
                 </div>
 
                 
-                <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleSubmit}>Register</button>
+                <Button type="submit" variant="outline-dark" className="btn-register" onClick={handleSubmit}>Register</Button>
                 <p className="forgot-password text-right">
-                    Already registered <Link  to={`/login/${window.location.pathname.split('/')[2]}`}  >log in?</Link>
+                    Already registered <Link  to={`/login/${window.location.pathname.split('/')[2]}`}  >log in?🎉</Link>
                 </p>
             </form>
+          </div>
             <div>
               {
                 (renderQrCode && props.registerSuccess) ? <QrCodeComponent handleCloseButton={handleRenderQrCodeClose}/> :  null

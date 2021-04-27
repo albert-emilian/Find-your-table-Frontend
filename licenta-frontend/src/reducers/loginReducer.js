@@ -33,7 +33,7 @@ const initialState = {
         errorMessage: ""
     },
 
-    loginValidationErrors: [],
+    validationErrors: [],
     renderTwoFactorForm: false,
     userId: "",
     twoFactorLoginValidationError: "",
@@ -57,7 +57,7 @@ export default function(state = initialState, action){
         case LOGIN_VALIDATION_ERRORS:
             return {
                 ...state,
-                loginValidationError: action.payload.loginValidationError
+                validationErrors: action.payload.validationErrors
             };
         
 

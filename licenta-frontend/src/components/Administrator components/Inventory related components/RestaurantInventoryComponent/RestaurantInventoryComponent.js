@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ReactDom from 'react-dom';
 import { connect } from 'react-redux'
 import { 
     INVENTORY_LIST_LOADING,
@@ -11,12 +12,14 @@ import {
     REFRESH_TOKEN_ADMINISTRATOR,
     ACCESS_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
+import {Button} from "react-bootstrap"
+import "./RestaurantInventoryComponent.css"
  
 
 export const RestaurantInventoryComponent = (props) => {
 
     const [renderAddItem, setRenderAddItem] = useState(false);
-
+    const [renderEditForm, setRenderEditForm] = useState(false);
     useEffect(async () => {
         props.dispatch({type: INVENTORY_LIST_LOADING});
     
@@ -43,7 +46,7 @@ export const RestaurantInventoryComponent = (props) => {
 
      
     
-    return (
+      return ReactDom.createPortal (
         <div className="inventory-item-list-container">
             {
                 props.inventoryItemListLoading ? <p>Loading...</p> : null
@@ -52,15 +55,18 @@ export const RestaurantInventoryComponent = (props) => {
                 props.inventoryItemsList.length === 0 ? <p>Inventory is empty</p> : null
             }
             {
-                props.isInventoryItemsListRetrieved ? props.inventoryItemsList.map(item => <InventoryItemComponent item = {item} key = {item.InventoryItemId}/>) 
+                props.isInventoryItemsListRetrieved ? props.inventoryItemsList.map(item => <InventoryItemComponent setRenderEditForm={setRenderEditForm}  item = {item} key = {item.InventoryItemId}/>) 
                     : <p>Could not retrieve inventory list</p>
             }
             {
                 renderAddItem ? <AddInventoryForm closeForm= {handleCloseAddItemFormButton}/> : null
             }
-            <button onClick={handleOpenAddItemFormButton} >Add item</button>
-        </div>
-    )
+            {
+                renderAddItem || renderEditForm ? null : <Button className="btn-add-ivtitem" variant="outline-dark" onClick={handleOpenAddItemFormButton} >Add item</Button>
+            }
+        </div>,
+         document.getElementById("add-inventory-item-form")
+    );
 }
 
 const mapStateToProps = (state) => ({

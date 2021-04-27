@@ -1,0 +1,29 @@
+.inventory-container{
+    text-align: center;
+    position: relative;
+    justify-items: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin: 4px;
+    height: 200%;
+    width: 50%;
+    overflow: hidden;
+    left: 25%;
+}
+
+.inventory-item-container{
+    text-align: center;
+    height: 120%;
+}
+
+.btn-delete-item{
+    position: relative;
+    width: 30%;
+    left: 0%;
+}
+
+.btn-edit-item{
+    position: relative;
+    width: 30%;
+    left: 0%;
+}

@@ -10,36 +10,68 @@
     background-color: rgba(0,0,0, 0.5);  
   }  
   .add-table-form-inner {  
-    position: absolute;  
-    left: 25%;  
+    position: absolute; 
+    width: 100%; 
+    height: 50%;
+    left: 0%;  
     right: 25%;  
     top: 40%;  
     bottom: 25%;  
     margin: auto;  
     border-radius: 20px;  
-    background: white;  
+    border: 2px solid black;
+    background: rgb(250, 240, 228);  
   }
 
   .add-table-form-title{
     position: relative;
-    left: 10%;
-    top: 10px;
+    text-align: center;
+    left: 35%;
+    width: 30%;
+    margin: 0;
+    height: 5%;
   }
 
-  #qrcode{ 
-    position: relative;
-    left: 40%;
-    top: 20px;
-  }
-
-  .close-add-table-form{ 
-    position: relative;
-    top: 50px;
-    left: 45%;
-  }
-
- 
 
   .add-table-form-title{
       margin-right: 10px;
+  }
+
+  .btn-add-table{
+    position: relative;
+    left: 4%;
+    top: 20%;
+    width: 60%;
+  }
+
+  .add-table-form-inner-inputs{
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    left: 15%;
+    top: 15%;
+   
+  }
+
+  #btn-add-table-close{
+    margin: 2%;
+  }
+
+  #btn-add-table-save{
+    margin: 2%;
+  }
+
+  #add-table-form-input-number{
+    width: 100%;
+    text-align: center;
+    margin-right: 5%;
+  }
+
+  #add-table-form-input-name{
+    margin-left: 5%;
+  }
+
+  #add-table-form-input-name-label{
+    position: relative;
+    right: 25%;
   }

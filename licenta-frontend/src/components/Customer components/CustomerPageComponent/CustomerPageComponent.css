@@ -1,7 +1,14 @@
 
 .container-restaurant-list{
+    text-align: center;
     position: relative;
-    left: 50%;
-    right: 50%;
-    overflow: scroll;
+    justify-items: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin: 4px;
+    height: 200%;
+    width: 50%;
+    overflow: hidden;
+    left: 25%;
+
 }

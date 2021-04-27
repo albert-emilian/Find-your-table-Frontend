@@ -1,21 +1,73 @@
-.home-links{
-    position: relative;
-    border-radius: 25px;
-    border: 2px solid black;
-    padding: 20px; 
-    margin: auto;
-    width: 600px;
-    top: 300px;
+.home-container{
+  display: grid;
+  grid-template-columns: repeat(2,40%);
+  grid-template-rows: repeat(2,50%);
+  grid-gap: 20%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
 }
 
-#link-login{
-    margin: 100px;
-    text-align: center;
-    width: 200px;
+.grid-item-1{
+  grid-column-start: 1;
+  grid-column-end: -1;
+  align-self: center;
+  justify-self: center;
 }
 
-#link-register{
-  margin: 100px;
-  width: 200px;
+
+
+.grid-item-2{
+  align-self: center;
+  justify-self: center;
+  margin-left: 60%;
+  width: 100%;
+  font-size: 120%;
+  animation: 2s linear 1s running slideinitem2;
 }
+
+.grid-item-3{
+  align-self: center;
+  justify-self: center;
+  margin-left: 16%;
+  width: 130%;
+  font-size: 120%;
+  animation: 2s linear 1s running slideinitem3;
+}
+
+.title-1{
+  font-size: 200%;
+}
+
+.title-2{
+  font-size: 100%;
+
+}
+
+@keyframes slideinitem3 {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 16%;
+    width: 130%;
+  }
+}
+
+@keyframes slideinitem2 {
+  from {
+    margin-left: 200%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 60%;
+    width: 100%;
+  }
+}
+
+
+
 

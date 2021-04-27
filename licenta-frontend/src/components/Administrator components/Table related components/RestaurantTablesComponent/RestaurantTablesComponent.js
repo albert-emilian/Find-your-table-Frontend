@@ -12,6 +12,8 @@ import { loadTableList } from '../../../../actions/tablesActions';
 import LoadingComponent from '../../../LoadingComponent/LoadingComponent';
 import TableComponent from '../TableComponent/TableComponent';
 import AddTableForm from '../AddTableForm/AddTableForm'
+import {Button} from 'react-bootstrap'
+import "./RestaurantTableComponent.css"
 
 
 const RestaurantTablesComponent = (props) => {
@@ -45,10 +47,10 @@ const RestaurantTablesComponent = (props) => {
     }
 
     return (
-        <div>
-        <div>
+        <div className="restaurant-tables">
+        <div className="table-list-container">
             {
-                props?.tableList.length > 0  ? props?.tableList.map((table) => <TableComponent table = {table} key = {table.TableId}/>) : <p>There are no existing tables.</p>
+                props?.tableList.length > 0  ? props?.tableList.map((table) => <TableComponent  table = {table} key = {table.TableId}/>) : <p>There are no existing tables.</p>
             }
             
         </div>
@@ -63,7 +65,7 @@ const RestaurantTablesComponent = (props) => {
                 renderAddTableForm ? <AddTableForm closeForm={handleCloseAddTableForm}/> : null
             }
            
-            <button onClick={handleOpenAddTableForm}>Add table</button>
+            <Button className="button-add-table" variant="outline-dark" onClick={handleOpenAddTableForm}>Add table</Button>
         </div>
     )
 }

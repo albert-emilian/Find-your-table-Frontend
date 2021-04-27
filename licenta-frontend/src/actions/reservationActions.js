@@ -2,7 +2,8 @@ import axios from 'axios';
 import { 
     RESERVATIONS_TABLE_LIST_FAIL,
     DELETE_RESERVATION_FAIL,
-    EXISTING_RESERVATION_FAIL
+    EXISTING_RESERVATION_FAIL,
+    RESERVATIONS_TABLE_CUSTOMER_LIST_FAIL
 } from '../actiontypes/index';
 import { 
     DNS,
@@ -29,6 +30,29 @@ export const loadReservationsList = async (tableId, dispatch) => {
         if(error.response && error.response.data)
         dispatch({type: RESERVATIONS_TABLE_LIST_FAIL, payload: { reservationsListError: {
             isError: true,
+            errorMessage: error.response.data.message
+        }
+    }});
+    }
+}
+
+
+
+export const loadReservationsListCustomer = async (tableId, dispatch) => {
+
+    try {
+
+        const result = await axios.post(`${DNS}/reservation/customer/table/all`, {
+            tableId: tableId,
+            accesToken: localStorage.getItem(ACCESS_TOKEN_CUSTOMER),
+            refreshToken: localStorage.getItem(REFRESH_TOKEN_CUSTOMER)
+        });
+
+        return result.data;
+        
+    } catch (error) {
+        if(error.response && error.response.data)
+        dispatch({type: RESERVATIONS_TABLE_CUSTOMER_LIST_FAIL, payload: { reservationsListTableCustomerError: {
             errorMessage: error.response.data.message
         }
     }});

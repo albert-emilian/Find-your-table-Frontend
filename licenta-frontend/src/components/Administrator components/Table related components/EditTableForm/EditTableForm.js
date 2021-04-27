@@ -6,6 +6,9 @@ import {
     REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
 import { updateRestaurantTable } from '../../../../actions/tablesActions';
+import "./EditTableForm.css"
+import {Button} from 'react-bootstrap';
+
 
 export const EditTableForm = (props) => {
 
@@ -49,21 +52,19 @@ export const EditTableForm = (props) => {
     return (
         <div className='edit-table-form'>  
         <div className='edit-table-form-inner'> 
-        <div>
+        <div className="edit-table-form-input">
          <label>
-             Table size
-             <input type="number" name="tableSize" min="1" max="100" defaultValue={TableSize} onChange={handleChange}></input>
+            <span>Table size </span> 
+             <input className="form-control" id="edit-table-input-table-size"  type="number" name="tableSize" min="1" max="100" defaultValue={TableSize} onChange={handleChange}></input>
          </label>  
-         </div> 
-         <div>
          <label>
-             Table name
-             <input type="text" name="tableName"  defaultValue={TableName} onChange={handleChange}></input>
+             <span id="edit-table-input-table-name-label">Table name</span>
+             <input className="form-control" id="edit-table-input-table-name" type="text" name="tableName"  defaultValue={TableName} onChange={handleChange}></input>
          </label>  
-         </div> 
+         </div>
                <div className='close-edit-table-form'>
-               <button  onClick={handleCloseButton}>Close</button>  
-               <button onClick={handleSaveButton}>Save</button>
+               <Button className="btn-edit-table" variant="outline-dark" onClick={handleCloseButton}>Close</Button>  
+               <Button className="btn-edit-table" variant="outline-dark" onClick={handleSaveButton}>Save</Button>
                </div>
         </div>  
        </div>  

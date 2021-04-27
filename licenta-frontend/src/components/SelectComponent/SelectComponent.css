@@ -1,18 +1,17 @@
-.container-select{
-    position: relative;
-    display: flex;
-    width: 50%;
-    left: 23%;
-}
-
 .select-county{
     position: relative;
-    left: 100px;
-    width: 300px;
+    left: 30%;
+    width: 84%;
+    margin-bottom: 2%;
+   
 }
 
 .select-city{
     position: relative;
-    left: 200px;
-    width: 300px;
+    left: 30%;
+    width: 84%;
+    margin-bottom: 2%;
+}
+.css-g1d714-ValueContainer{
+    border-color: black;
 }

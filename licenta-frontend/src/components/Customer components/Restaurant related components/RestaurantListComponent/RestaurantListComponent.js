@@ -11,6 +11,7 @@ import {
     ACCESS_TOKEN_CUSTOMER,
     REFRESH_TOKEN_CUSTOMER
 } from '../../../../helpers/constants'
+import './RestaurantListComponent.css'
 
 
 export const RestaurantListComponent = (props) => {

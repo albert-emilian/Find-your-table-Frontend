@@ -13,7 +13,8 @@ import { deleteRestaurantTable } from '../../../../actions/tablesActions'
 import { loadReservationsList } from '../../../../actions/reservationActions'
 import EditTableForm from '../EditTableForm/EditTableForm'
 import ReservationsListComponent from '../../Reservation related components/ReservationsListComponent/ReservationsListComponent'
-
+import "./TableComponent.css"
+import {Button} from "react-bootstrap"
 
 function TableComponent(props) {
 
@@ -71,19 +72,18 @@ function TableComponent(props) {
 
 
     return (
-        <div>
-            <label>
-                Table size: { TableSize}
+        <div className="table-container">
+            <label className="table-label-info">
+                Table 🍽: { <span id="table-label-info-content-name">{TableName}</span> }
             </label>
-            <label>
-                Table size: { Reserved }
+            <label  className="table-label-info">
+                Table size 👨‍👩‍👧: { <span id="table-label-info-content-size">{TableSize}</span>}
             </label>
-            <label>
-                Table size: { TableName }
-            </label>
-            <button onClick={handleDeleteButton}>Delete</button>
-            <button onClick={handleEditButton}>Edit</button>
-            <button onClick = {handleReservations}>Reservations</button>
+            <div>
+            <Button className="button-table" variant="outline-dark" onClick={handleDeleteButton}>Delete</Button>
+            <Button className="button-table" variant="outline-dark" onClick={handleEditButton}>Edit</Button>
+            <Button className="button-table" variant="outline-dark" onClick = {handleReservations}>Reservations</Button>
+            </div>
             <div>
             {
                 renderEditForm ? <EditTableForm closeForm={closeEditForm} table={props.table}/> : null

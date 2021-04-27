@@ -1,0 +1,10 @@
+.table-reservation-list-container{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.btn-close-table-reservation-list{
+    position: relative;
+    width: 30%;
+    left: 0%;
+}

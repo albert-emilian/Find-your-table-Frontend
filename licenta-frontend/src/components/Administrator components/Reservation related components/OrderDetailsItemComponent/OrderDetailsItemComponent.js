@@ -1,4 +1,5 @@
 import React from 'react'
+import './OrderDetailsItemComponent.css'
 
 export default function OrderDetailsItemComponent(props) {
 
@@ -6,17 +7,17 @@ export default function OrderDetailsItemComponent(props) {
 
     return (
         <div>
-            <label>
-                Name : {Name}
+            <label className="label-table-order-details">
+                Name 🍔: <span className="label-table-order-details-content">{Name}</span>
             </label>
-            <label>
-                InventoryQuantity : {InventoryQuantity}
+            <label  className="label-table-order-details">
+                Inventory quantity : <span className="label-table-order-details-content">{InventoryQuantity}</span>
             </label>
-            <label>
-                Price : {UnitPrice}
+            <label  className="label-table-order-details">
+                Price 💰: <span className="label-table-order-details-content">{UnitPrice} lei</span> 
             </label>
-            <label>
-                Quantity : {Quantity}
+            <label  className="label-table-order-details">
+                Quantity : <span className="label-table-order-details-content">{Quantity}</span> 
             </label>
         </div>
     )

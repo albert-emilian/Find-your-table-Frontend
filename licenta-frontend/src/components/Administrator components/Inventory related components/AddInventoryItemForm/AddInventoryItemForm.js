@@ -11,6 +11,7 @@ import {
 } from '../../../../helpers/constants'
 import { addInventoryItem } from '../../../../actions/inventoryActions'
 import "./AddInventoryItemForm.css"
+import { Button } from 'react-bootstrap'
 
 export const AddInventoryItemForm = (props) => {
 
@@ -36,14 +37,15 @@ export const AddInventoryItemForm = (props) => {
 
         const result = await addInventoryItem(item, props.loggedUser.email, props.dispatch);
 
-        
-        const { accesToken, refreshToken, inventoryItemsList  } = result;
+        if(result){
+            const { accesToken, refreshToken, inventoryItemsList  } = result;
 
-        if(result.inventoryItemsList){
-            props.dispatch({type: ADD_INVENTORY_ITEM_SUCCESS, payload: { inventoryItemsList: inventoryItemsList}});
-
-            localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR, accesToken);
-            localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken)
+            if(result.inventoryItemsList){
+                props.dispatch({type: ADD_INVENTORY_ITEM_SUCCESS, payload: { inventoryItemsList: inventoryItemsList}});
+    
+                localStorage.setItem(ACCESS_TOKEN_ADMINISTRATOR, accesToken);
+                localStorage.setItem(REFRESH_TOKEN_ADMINISTRATOR,refreshToken)
+            }
         }
     }
     
@@ -60,37 +62,39 @@ export const AddInventoryItemForm = (props) => {
 
         <div className='add-item-form'>  
         <div className='add-item-form-inner'> 
-        <div>
-         <label>
+        <h3 className="add-item-form-title">Complete the fields with information about the item that you want to add!😊</h3>
+        <div className="add-item-form-inputs">
+         <label className="add-item-form-label">
              Name
-             <input type="text" name="name" onChange={handleChange}></input>
          </label>  
-         <div className="input-error">{renderError(props.addInventoryItemsValidationErrors,NAME) }</div>
+         <input className="add-item-form-input-name form-control" type="text" name="name" onChange={handleChange}></input>
+         <p className="input-error">{renderError(props.addInventoryItemsValidationErrors,NAME)}</p>
          </div> 
-         <div>
-         <label >
-             Description
-             <textarea type="text" name="description" onChange={handleChange}></textarea>
-         </label>  
-         <div className="input-error">{renderError(props.addInventoryItemsValidationErrors,DESCRIPTION) }</div>
-         </div>
-         <div>
-         <label >
+         <div  className="add-item-form-inputs">
+         <label className="add-item-form-label" >
              Unit price
-             <input type="text" name="unitprice" onChange={handleChange}></input>
          </label>  
-         <div className="input-error">{renderError(props.addInventoryItemsValidationErrors,UNIT_PRICE) }</div>
+         <input className="add-item-form-input-price form-control" type="text" name="unitprice" onChange={handleChange}></input>
+         <p className="input-error">{renderError(props.addInventoryItemsValidationErrors,UNIT_PRICE)}</p>
          </div>
-         <div>
-         <label >
+         <div  className="add-item-form-inputs">
+         <label className="add-item-form-label" >
              Quantity
-             <input type="text" name="quantity" onChange={handleChange}></input>
          </label>  
-         <div className="input-error">{renderError(props.addInventoryItemsValidationErrors,QUANTITY) }</div>
+         <input className="add-item-form-input-quantity form-control" type="text" name="quantity" onChange={handleChange}></input>
+         <p className="input-error">{renderError(props.addInventoryItemsValidationErrors,QUANTITY)}</p>
          </div>
+         <div  className="add-item-form-inputs">
+         <label className="add-item-form-label">
+             Description
+         </label>  
+         <textarea className="add-item-form-input-description form-control" type="text" name="description" onChange={handleChange}></textarea>
+         <p className="input-error">{renderError(props.addInventoryItemsValidationErrors,DESCRIPTION)}</p>
+         </div>
+         
                <div className='close-add-item-form'>
-               <button  onClick={handleCloseButton}>Close</button>  
-               <button onClick={handleSaveButton}>Save</button>
+               <Button variant="outline-dark" onClick={handleCloseButton}>Close</Button>  
+               <Button variant="outline-dark" onClick={handleSaveButton}>Save</Button>
                </div>
         </div>  
        </div>  

@@ -10,7 +10,8 @@ import {
     ACCESS_TOKEN_ADMINISTRATOR,
     REFRESH_TOKEN_ADMINISTRATOR
 } from '../../../../helpers/constants'
-
+import './InventoryItemComponent.css'
+import {Button} from 'react-bootstrap'
 function InventoryItemComponent(props) {
 
     const [renderEdit, setRenderEdit] = useState(false);
@@ -41,27 +42,41 @@ function InventoryItemComponent(props) {
 
     const handleEditButton = ()  => {
             setRenderEdit(true);
+            props.setRenderEditForm(true);
     }
 
     const closeEditForm = () => {
             setRenderEdit(false);
+            props.setRenderEditForm(false);
+
     }
 
     return (
-        <div>
-            <label>
+        <div className="inventory-container">
+            <div>
                 Name: {Name}
+            </div>
+            <div>
                 Description: {Description}
-                UnitPrice: {UnitPrice}
-                InventoryQuantity: {InventoryQuantity}
-            </label>
+            </div>
+            <div>
+                Price: {UnitPrice}
+            </div>
+            <div>
+                Inventory quantity: {InventoryQuantity}
+            </div>
             <div>
             {
-                renderEdit ? <EditInventoryItemForm item = {props.item} closeEditForm = {closeEditForm}/> : null
+                renderEdit ? <EditInventoryItemForm className="inventory-item-container" item = {props.item} closeEditForm = {closeEditForm}/> : null
             }
             </div>
-            <button onClick={handleDeleteButton}>Delete</button>
-            <button onClick={handleEditButton}>Edit</button>
+            {
+                renderEdit ? null : <Button className="btn-delete-item" variant="outline-dark" onClick={handleDeleteButton}>Delete</Button>
+            }
+            {
+                renderEdit ? null : <Button className="btn-edit-item" variant="outline-dark" onClick={handleEditButton}>Edit</Button>
+            }
+            
         </div>
     )
 }

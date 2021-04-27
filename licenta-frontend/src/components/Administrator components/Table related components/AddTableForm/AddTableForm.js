@@ -9,6 +9,8 @@ import {
     TABLE_SIZE
 } from '../../../../helpers/constants'
 import { addTable } from '../../../../actions/tablesActions'
+import {Button} from 'react-bootstrap'
+import './AddTableForm.css'
 
 
 export const AddTableForm = (props) => {
@@ -49,21 +51,20 @@ export const AddTableForm = (props) => {
     return (
         <div className='add-table-form'>  
         <div className='add-table-form-inner'> 
-        <div>
+        <h3 className="add-table-form-title">Add a table!😊</h3>
+         <div className="add-table-form-inner-inputs">
          <label>
              Table size
-             <input type="number" name="tableSize" min="1" max="100" onChange={handleChange}></input>
+             <input id="add-table-form-input-number" className="form-control" type="number" name="tableSize" min="1" max="100" onChange={handleChange}></input>
          </label>  
-         </div> 
-         <div>
          <label>
-             Table name
-             <input type="text" name="tableName" onChange={handleChange}></input>
+             <span id="add-table-form-input-name-label">Table name</span>
+             <input id="add-table-form-input-name" className="form-control" type="text" name="tableName" onChange={handleChange}></input>
          </label>  
-         </div> 
-               <div className='close-add-table-form'>
-               <button  onClick={handleCloseButton}>Close</button>  
-               <button onClick={handleSaveButton}>Save</button>
+         </div>
+               <div  className="btn-add-table">
+               <Button id="btn-add-table-close" variant="outline-dark" onClick={handleCloseButton}>Close</Button>  
+               <Button  id="btn-add-table-save" variant="outline-dark" onClick={handleSaveButton}>Save</Button>
                </div>
         </div>  
        </div>  

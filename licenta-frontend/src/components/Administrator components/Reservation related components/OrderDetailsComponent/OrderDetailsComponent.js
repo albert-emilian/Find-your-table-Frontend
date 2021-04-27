@@ -10,6 +10,8 @@ import {
 } from '../../../../helpers/constants'
 import {loadOrderDetails} from '../../../../actions/orderActions';
 import OrderDetailsItemComponent from '../OrderDetailsItemComponent/OrderDetailsItemComponent';
+import {Button} from 'react-bootstrap'
+import './OrderDetailsComponent.css'
 
 export const OrderDetailsComponent = (props) => {
 
@@ -46,24 +48,21 @@ const handleCloseButton = () => {
         <div>
             <h4>Items</h4>
             {
-                props.orderDetails.OrderItems.length > 0 ? props.orderDetails.OrderItems.map(item => <OrderDetailsItemComponent item={item} key={item.InventoryItemId}/>) : <p>There are not items added to the order yet!😁</p> 
+                props.orderDetails?.OrderItems?.length > 0 ? props.orderDetails.OrderItems.map(item => <OrderDetailsItemComponent item={item} key={item.InventoryItemId}/>) : <p>There are not items added to the order yet!😁</p> 
             }
         </div>
         <div>
-        <label>
-                OrderId : {props.orderDetails.OrderId}
+            <label className="table-order-details">
+                OrderId : <span className="table-order-details-content">{props.orderDetails.OrderId ?? 0}</span>
             </label>
-            <label>
-                Total : {props.orderDetails.OrderTotal}
+            <label className="table-order-details">
+                Total 💰: <span className="table-order-details-content">{props.orderDetails.OrderTotal ?? 0} lei</span>
             </label>
-            <label>
-                Tips : {props.orderDetails.Tips}
+            <label className="table-order-details">
+                Tips : <span className="table-order-details-content">{props.orderDetails.Tips ?? 0} lei</span>
             </label>
         </div>
-        <button onClick={handleCloseButton}>Close</button>
-        {
-            console.log(props)
-        }
+        <Button className="button-close-table-order-details" variant="outline-dark" onClick={handleCloseButton}>Close</Button>
         </div>
     )
 }

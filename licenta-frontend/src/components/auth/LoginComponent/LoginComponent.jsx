@@ -10,7 +10,9 @@ import {
     LOGIN_FAIL_CLOSE,
     RESTAURANT_LOGOUT_CLEAR} from '../../../actiontypes/index';
 import TwoFactorAuthComponent from '../../TwoFactorAuthComponent/TwoFactorAuthComponent';
-
+import { Button } from 'react-bootstrap';
+import { TextField } from '@material-ui/core'
+import '../LoginComponent/LoginComponent.css'
 
 function Login(props) {
 
@@ -50,28 +52,30 @@ function Login(props) {
         props.dispatch({type: LOGIN_FAIL_CLOSE});
       }
 
+
         return ReactDom.createPortal(
             <div>
-            <form className="form-sign-up">
-                <h3 className="component-title">Login</h3>
-
-                <div className="form-group">
-                    <label>Email</label>
-                    <input name="email" type="email" className="form-control" placeholder="Enter email" onChange={handleChange}/>
-                    <div className="input-error">{renderError(props.loginValidationErrors,EMAIL)}</div>
+            <div className="login-container">
+            <form className="form-login">
+                <h3 className="form-login-title">Login</h3>
+                <div className="form-login-group">
+                    <label className="input-label">Email</label>
+                    <input id="login-input-email" name="email" type="email" className="form-control" placeholder="Enter email" onChange={handleChange}/>
+                    <div className="input-error-login-email">{renderError(props.validationErrors,EMAIL)}</div>
                 </div>
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input name="password" type="password" className="form-control" placeholder="Enter password" onChange={handleChange} />
-                    <div className="input-error">{renderError(props.loginValidationErrors,PASSWORD)}</div>
+                <div className="form-login-group">
+                    <label className="input-label">Password</label>
+                    <input id="login-input-password" name="password" type="password" className="form-control" placeholder="Enter password" onChange={handleChange}/>
+                    <div className="input-error-login-password">{renderError(props.validationErrors,PASSWORD)}</div>
                 </div>
 
-                <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleSubmit}>Login</button>
-                <p className="forgot-password text-right">
-                    Don`t have an account? <Link  to={`/register/${window.location.pathname.split('/')[2]}`}>Sign up here!</Link>
+                <Button className="btn-login" variant="outline-dark" onClick={handleSubmit}>Login</Button>
+                <p className="sign-up-message ">
+                    Don`t have an account? <Link  to={`/register/${window.location.pathname.split('/')[2]}`}>Sign up here!✍️</Link>
                 </p>
             </form>
+            </div>
             <div>
                 {
                     props.loginError.isError ? <ErrorComponent errorMessage={props.loginError.errorMessage} handleCloseButton={handleErrorPopUpClose}/>  : null
@@ -90,7 +94,7 @@ function Login(props) {
 const mapStateToProps = (state) => ({
     loggedUser: state.login.loggedUser,
     loggedIn: state.login.loggedIn,
-    loginValidationErrors: state.login.loginValidationErrors,
+    validationErrors: state.login.validationErrors,
     loginError: state.login.loginError,
     renderTwoFactorForm: state.login.renderTwoFactorForm
 })

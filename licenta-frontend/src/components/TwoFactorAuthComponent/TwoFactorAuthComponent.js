@@ -10,6 +10,7 @@ import {
     EXISTING_RESERVATION
 } from '../../actiontypes/index'
 import { verifiyExistingActiveReservation } from '../../actions/reservationActions'
+import { Button } from 'react-bootstrap'
 
 
  function TwoFactorAuthComponent(props) {
@@ -41,7 +42,7 @@ import { verifiyExistingActiveReservation } from '../../actions/reservationActio
         const entity = window.location.pathname.split('/')[2];
         let path = `/${entity}/page`;
         const result = await twoFactorValidation(props.userId, Object.values(code)[0], entity, props.dispatch);
-
+        
        if(!result) return;
        
        const {loggedUser, accesToken, refreshToken} = result;
@@ -96,28 +97,31 @@ import { verifiyExistingActiveReservation } from '../../actions/reservationActio
        }
 
     return (
+       <div className="container-twofactor">
         <div className='popup-two-factor-auth'>  
             <div className='popup-two-factor-auth-inner'>  
             <h3 className='popup-two-factor-auth-title'>Enter the code from Google Authenticator</h3>  
             <div className='popup-two-factor-form'>
-                <label>
-                    <input name="code" type="text" onChange={handleOnChange}></input>
-                </label>
-                <button onClick={handleSignInButton}>Sign in</button>
-                <button onClick={handleCanelButton}>Cancel</button>
-                <button onClick={handleLostQrCod}>Lost code</button>    
+                <div className="popup-two-form-input">
+                <input className="form-control"  name="code" placeholder="Code" type="text" onChange={handleOnChange}></input>
+                </div>
+                <Button id="popup-two-form-signin" variant="outline-dark" onClick={handleSignInButton}>Sign in</Button>
+                <Button id="popup-two-form-qr" variant="outline-dark" onClick={handleLostQrCod}>Lost code</Button>    
+                <Button id="popup-two-form-cancel" variant="outline-dark" onClick={handleCanelButton}>Cancel</Button>
+               
                 <div>
                     {
                         props.twoFactorLoginValidationError ? 
-                            <p>{props.twoFactorLoginValidationError}</p> : null
+                            <p className="signin-error-message">{props.twoFactorLoginValidationError}</p> : null
                     }
                     {
-                        renderRecuperationMessage ? <p>An email has been sent to you! Check it out to get you code back!😁</p> : null
+                        renderRecuperationMessage ? <div  className="qr-message-container"><p className="qr-message">An email has been sent to you! Check it out to get you code back!😁</p></div> : null
                     }
                 </div>
             </div>
             </div>
         </div>  
+        </div> 
     )
 }
 

@@ -13,6 +13,7 @@ import {
 } from '../../../../actiontypes/index';
 import TimePicker from 'react-bootstrap-time-picker';
 import {createReservation} from '../../../../actions/reservationActions'
+import CustomerReservationTableComponent from '../CustomerReservationTableComponent/CustomerReservationTableComponent'
 
 
 
@@ -123,6 +124,9 @@ export const CustomerTablesComponent = (props) => {
                     </label>
                     <button onClick={handleCreateReservation}>Create reservation</button>
                     <button onClick={handleCloseCreateReservationForm}>Close</button>
+                    <div>
+                        <CustomerReservationTableComponent tableId={TableId}/>
+                    </div>
                 </div> : null
               }
                

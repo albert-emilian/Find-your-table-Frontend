@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Navbar, Nav, Form, Button, FormControl} from 'react-bootstrap';
+import {Navbar, Nav, Form, Button, FormControl, Container} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 import { useHistory } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,26 +24,36 @@ import './NavBarComponent.css'
         <div>
         {
     entity === "administrator" ?
-        <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Find your table!</Navbar.Brand>
-            <Nav className="mr-auto">
-                <Nav.Link href="#restaurantinfo">Restaurant information</Nav.Link>
-                <Nav.Link href="#inventory">Inventory</Nav.Link>
-                <Nav.Link href="#tables">Tables</Nav.Link>
+        <div className="container">
+        <Navbar className="navbar" collapseOnSelect fixed="top" bg="dark" expand="sm"  variant="dark">
+        <Navbar.Brand className="page-title" href="#home">Find your table!</Navbar.Brand>
+        <Container className="navbar-container">
+            <Navbar.Toggle className="toggle" aria-controls="responsive-navbar-nav"/>
+            <Navbar.Collapse className="collapse-navbar" id="responsive-navbar-nav">
+            <Nav className="link-containers">
+                <Nav.Link className="nav-link" href="#restaurantinfo">Restaurant information</Nav.Link>
+                <Nav.Link className="nav-link" href="#inventory">Inventory</Nav.Link>
+                <Nav.Link className="nav-link" href="#tables">Tables</Nav.Link>
+                <Nav.Link className="nav-link"  className="btn-signout" bsStyle="primary" onClick={handleClicklSignOut} >Sign out</Nav.Link>
             </Nav>
-            <Form id="button-navbar-container">
-                <Button id="btn-navbar" bsStyle="primary" onClick={handleClicklSignOut} >Sign out</Button>
-            </Form>
+            </Navbar.Collapse>
+            </Container>
         </Navbar>
+        </div>
             :
-        <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Find your table!</Navbar.Brand>
-            <Nav className="mr-auto">
+            <div className="container">
+        <Navbar className="navbar" collapseOnSelect fixed="top" bg="dark" expand="sm"  variant="dark">
+        <Navbar.Brand className="page-title" href="#home">Find your table!</Navbar.Brand>
+        <Container className="navbar-container">
+            <Navbar.Toggle className="toggle" aria-controls="responsive-navbar-nav"/>
+            <Navbar.Collapse className="collapse-navbar" id="responsive-navbar-nav">
+            <Nav className="link-containers">
+                <Nav.Link className="nav-link"  className="btn-signout" bsStyle="primary" onClick={handleClicklSignOut} >Sign out</Nav.Link>
             </Nav>
-            <Form id="button-navbar-container">
-                <Button id="btn-navbar" bsStyle="primary" onClick={handleClicklSignOut} >Sign out</Button>
-            </Form>
+            </Navbar.Collapse>
+            </Container>
         </Navbar>
+        </div>
         }
   
   

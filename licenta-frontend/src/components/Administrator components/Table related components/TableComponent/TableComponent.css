@@ -1,0 +1,18 @@
+.table-label-info{
+    margin-left: 2%;
+}
+
+#table-label-info-content-name{
+    font-weight: bold;
+    
+}
+
+#table-label-info-content-size{
+    font-weight: bold;
+}
+
+.button-table{
+    width: 18%;
+    left: 2%;
+    margin: 1%
+}

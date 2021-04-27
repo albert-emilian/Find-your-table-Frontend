@@ -31,7 +31,7 @@ import {
         const response = await axios.post(
           `${DNS}/stripe/charge`,
           {
-            amount: props.order.OrderTotal,
+            amount: props.order.OrderTotal + props.order.Tips,
             id: id,
             reservationId: props.reservation.ReservationId,
             orderId: props.order.OrderId,

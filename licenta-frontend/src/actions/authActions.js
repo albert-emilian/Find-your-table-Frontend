@@ -82,9 +82,9 @@ export const loginUser = async (user, dispatch,entity) => {
        }
 
     } catch (error) {
-        
+        console.log(error)
     if(error.validationErrors)
-        dispatch({type: LOGIN_VALIDATION_ERRORS, payload:{loginValidationErrors: error.validationErrors}});
+        dispatch({type: LOGIN_VALIDATION_ERRORS, payload:{validationErrors: error.validationErrors}});
     
     if(error.response && error.response.data)
         dispatch({type: LOGIN_FAIL, payload: {loginError:{
@@ -126,7 +126,6 @@ export const twoFactorValidation = async (userId, token, entity,dispatch) => {
        };
         
     } catch (error) {
-        console.log(error.response.data)
     if(error.errorMessage)
     dispatch({type: TWO_FACTOR_VALIDATION_ERRORS, payload: {twoFactorLoginValidationError: error.errorMessage}});
     

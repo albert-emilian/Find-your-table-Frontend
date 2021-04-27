@@ -18,11 +18,17 @@ function Home(props){
     },[])
 
     return(
-        <div>
-           <div className="home-links">
-                <Link id="link-login" to="/login/customer">Find your table!</Link>              
-                <Link id="link-register" to="/login/administrator">Welcome your clients!</Link>              
+        <div className="home-container">
+           <div className="grid-item grid-item-1">
+           <h1 className="title title-1">Find your table!</h1>
+           <h3 className="title title-2">Thanks for using our services!🙏🏽</h3>
            </div>
+           <div className="grid-item grid-item-2">
+                <Link id="link-login" to="/login/customer">Check the nearby available tables!🍽</Link>              
+           </div>
+            <div className="grid-item grid-item-3">
+                <Link id="link-register" to="/login/administrator">Welcome your clients!👨‍🍳</Link>              
+            </div>
         </div>
     )
 
