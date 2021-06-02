@@ -30,6 +30,7 @@
     "react-time-picker": "^4.2.1",
     "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
+    "styled-components": "^5.2.3",
     "validator": "^13.5.2",
     "web-vitals": "^1.1.0"
   },

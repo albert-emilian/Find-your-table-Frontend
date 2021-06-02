@@ -1,4 +1,53 @@
-.restaurant-info-container{
+.restaurant-container{
     display: grid;
-    place-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      ". Restaurant-info Restaurant-info Occupation"
+      "Tables Tables Menu Menu"
+      ". . . ."
+      ". GoogleMaps GoogleMaps .";
+}
+
+.restaurant-info-container { grid-area: Restaurant-info; }
+.occupation-container { grid-area: Occupation; }
+.table-list-container { grid-area: Tables; }
+.restaurant-menu-container { grid-area: Menu; }
+.maps-container { grid-area: GoogleMaps; }
+
+.restaurant-info-container{
+    text-align: center;
+}
+
+.maps-container{
+    margin-top: 5%;
+    background-color: white;
+    height: 45%;
+}
+
+.restaurant-menu-container{
+    text-align: center;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+    bottom: 30%;
+}
+
+.occupation-container{
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    height: 40%;
+    overflow: hidden;
+}
+
+.table-list-container{
+    position: relative;
+    bottom: 30%;
+}
+
+.menu-item-info{
+    margin: 1%;
 }

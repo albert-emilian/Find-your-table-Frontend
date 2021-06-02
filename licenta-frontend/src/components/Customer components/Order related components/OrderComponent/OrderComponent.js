@@ -11,6 +11,8 @@ import {
     REFRESH_TOKEN_CUSTOMER
 } from '../../../../helpers/constants'
 import { cancelReservation } from '../../../../actions/reservationActions';
+import {Button} from 'react-bootstrap'
+import './OrderComponent.css'
 
 const OrderComponent = (props) => {
 
@@ -49,30 +51,31 @@ const OrderComponent = (props) => {
 }
 
     return (
-        <div>
-            <div>
-          <h3>Order</h3>
+        <div className="order-component">
+            <div className="order-component-title">
+          <h3>Order 📃</h3>
             </div>
             <div>
-            <div>
-                <button onClick={handleCancelReservation}>Cancel reservation</button>
-                {
-                 props.deleteReservationHourError.isError ? <p>{props.deleteReservationHourError.errorMessage}</p>: null
-                }
-            </div>
+         
             <div>
                 {
                    props?.orderItems.length > 0 ? props.orderItems.map(item => <OrderItemComponent item={item} key={item.InventoryItemId}/>) : "Your order is empty"
                 }
             </div>
-                <label>
-                    Order id: {props.order.OrderId}
-                    Total: {props.order.OrderTotal}
-                    Tips: {props.order.Tips}
-                </label> 
                 <div>
-                <button onClick={handlePay}>Pay</button>
-                </div>               
+                    <span className="order-information">Order id: {props.order.OrderId}</span>
+                    <span className="order-information">Total: {props.order.OrderTotal} lei</span>
+                    <span className="order-information">Tips: {props.order.Tips} lei</span>
+                </div> 
+                <div>
+                <Button variant="outline-dark" className="order-button" onClick={handlePay}>Pay</Button>
+                </div>    
+                <div>
+                <Button variant="outline-dark" className="order-button" onClick={handleCancelReservation}>Cancel reservation</Button>
+                {
+                 props.deleteReservationHourError.isError ? <p>{props.deleteReservationHourError.errorMessage}</p>: null
+                }
+            </div>           
                 
             </div>     
         </div>

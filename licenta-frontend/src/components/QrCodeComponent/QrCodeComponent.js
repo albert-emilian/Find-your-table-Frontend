@@ -1,6 +1,7 @@
 import QRCode from 'qrcode.react';
 import { connect } from 'react-redux';
 import './QrCodeComponent.css';
+import { Button } from 'react-bootstrap';
 
 
 function QrCodeComponent(props){
@@ -10,7 +11,7 @@ return (
       <h3 className='popup-title'>Scan the QR Code into Google Authenticator</h3>  
         <QRCode id="qrcode" value={props.qrCode}/>
             <div className='close-popup'>
-            <button  onClick={props.handleCloseButton}>Close</button>  
+            <Button variant="outline-dark" classNam="btn-close-qr-component"  onClick={props.handleCloseButton}>Close</Button>  
             </div>
      </div>  
     </div>  

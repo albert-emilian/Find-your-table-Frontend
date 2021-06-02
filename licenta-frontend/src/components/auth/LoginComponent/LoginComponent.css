@@ -22,13 +22,13 @@
     overflow:hidden;
 }
 
-.form-login-title{
+  .form-login-title{
     position: relative; /* or absolute */
     top: 90%;
     left: 50%;
     width: 50%;
     overflow:hidden;
-}
+}  
 
 .form-login-group {
     position: relative; /* or absolute */

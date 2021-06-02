@@ -22,17 +22,26 @@
     margin-left: 10%;
 }
 
+#componente-title-register{
+    position: relative; /* or absolute */
+    top: 70%;
+    left: 30%;
+    width: 50%;
+    text-align: center;
+}
+
 .component-title{
     position: relative; /* or absolute */
     top: 70%;
-    left: 45%;
+    left: 42%;
     width: 50%;
+    text-align: center;
 }
 
 .form-group {
     position: relative; /* or absolute */
     top: 70%;
-    left: 30%;
+    left: 42%;
     width: 50%;
 }
 

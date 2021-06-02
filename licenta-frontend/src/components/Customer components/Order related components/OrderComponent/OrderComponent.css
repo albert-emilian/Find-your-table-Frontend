@@ -1,0 +1,17 @@
+.order-component{
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-right: 2%;
+}
+
+.order-button{
+    width: 30%;
+    left: 0;
+    margin: 1%
+}
+
+.order-information{
+    margin: 2%;
+}

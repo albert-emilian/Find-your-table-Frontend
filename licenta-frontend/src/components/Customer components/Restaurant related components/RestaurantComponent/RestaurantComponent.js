@@ -88,50 +88,50 @@ export const RestaurantComponent = (props) => {
     return (
         <div>
           <NavBarComponent signOutCustomer={handleSignOutClick}/>
-            Restaurant
-            <div className="restaurant-info-container">
-                <h1 className="restaurant-title">{Name}</h1>
-                    <h4 className="restaurant-description">{Theme}</h4>
-                    <h4 className="restaurant-description">{Description}</h4>
-                <div className="restaurant-info">
-                    <p>{County}</p>
-                    <p>{City}</p>
-                    <p>{Phone}</p>
-                    <p>{Email}</p>
+            <div className="restaurant-container">
+                <div className="restaurant-info-container">
+                    <h1 className="restaurant-title">{Name}</h1>
+                        <h4 className="restaurant-description">{Theme}</h4>
+                        <h5 className="restaurant-description">{Description}</h5>
+                    <div className="restaurant-info">
+                       Restaurant address 📍 <p>{County.toString() + City.toString() + Street.toString() + LocNumber.toString()}</p>
+                       Contact ☎️ <p>{"Phone: " + Phone + ", " + "Email: " + Email}</p>
+                    </div>
                 </div>
                 <div className="restaurant-list-loading">
                     {
                         props.tableListLoading ? <LoadingComponent/> : null
                     }
                 </div>
-                <div className="restaurant-tables-list">
-                    <div>
+                    <div className="occupation-container">
                         <OccupationIntervalComponent restaurantId={RestaurantId}/>
                     </div>
+                    <div className="table-list-container">
+                        <h3>Tables</h3>
                     {
                         props.isTableListRetrieved ? props.tableList.map(table =>  <CustomerTableComponent table={table} key={table.TableId}/>) : null
                     }
+                    </div>
                     {
                         props.isTableListRetrieved ? props.tableList.length === 0 : <h4>"The restaurant did not expose any of it`s tables."</h4>
                     }
-                    <div>
-                        <h3>Menu</h3>
+                    <div className="restaurant-menu-container">
+                        <h3>Menu 🍔</h3>
                         {
                             
                             menu.length > 0 ? menu.map(item => <div key={item.InventoryItemId}>
-                                <label>
-                                    Name: {item.Name}
-                                </label>
-                                <label>
-                                    Price {item.UnitPrice}
-                                </label>
-                            </div>) : <p>The restaurant has not created it` menu, come back later to check it!🕣</p>
+                                <span className="menu-item-info">
+                                    Name: {item.Name} 
+                                </span>
+                                <span className="menu-item-info">
+                                    Price {item.UnitPrice} lei
+                                </span>
+                            </div>) : <p>The restaurant has not created it`s menu, come back later to check it!🕣</p>
                         }
                     </div>
-                    <div>
+                    <div className="maps-container">
                     {coordinates.coordsReady ? <GoogleMapsComponent lat={coordinates.lat} lng={coordinates.lng}/> : null}
                     </div>
-                    </div>          
             </div>
         </div>
     )

@@ -17,7 +17,9 @@
     bottom: 25%;  
     margin: auto;  
     border-radius: 20px;  
-    background: white;  
+    background-color: rgb(250, 240, 228);
+    border-color: black;
+    border: 2px solid black;
   }
 
   .popup-title{
@@ -34,8 +36,8 @@
 
   .close-popup{ 
     position: relative;
-    top: 50px;
-    left: 45%;
+    top: 32px;
+    left: -2%;
   }
 
  

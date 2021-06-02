@@ -8,6 +8,8 @@ import {
     ACCESS_TOKEN_CUSTOMER
 } from '../../../../helpers/constants'
 import { deleteOrderItem } from '../../../../actions/orderActions';
+import {Button} from 'react-bootstrap'
+import './OrderItemComponent.css'
 
 const OrderItemComponent = (props) => {
 
@@ -35,11 +37,9 @@ const OrderItemComponent = (props) => {
     }
 
     return (
-        <div>
+        <div className="">
          {props.menu.filter(item => item.InventoryItemId === inventoryItemId).map(item => item.Name)} x {OrderQuantity}
-            <div>
-                <button onClick={handleRemoveItem}>Remove</button>
-            </div>
+                <Button className="order-item-btn-remove" variant="outline-dark" onClick={handleRemoveItem}>Remove</Button>
         </div> )
     
 }

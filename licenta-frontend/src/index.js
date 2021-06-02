@@ -19,8 +19,10 @@ import AdministratorPageComponent from './components/Administrator components/Ad
 import RestaurantComponent from './components/Customer components/Restaurant related components/RestaurantComponent/RestaurantComponent'
 import ReservationComponent from './components/Customer components/ReservationComponent/ReservationComponent'
 import StripeComponent from "./components/Payment/StripeComponent/StripeComponent";
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import './index.css'
 
+//background-color: rgb(250, 240, 228);
 
 const store = createStore(rootReducer);
 
@@ -55,5 +57,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+serviceWorkerRegistration.register();
 
 

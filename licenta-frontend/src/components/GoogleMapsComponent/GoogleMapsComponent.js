@@ -36,5 +36,5 @@ export const GoogleMapsComponent = (props) => {
 
 
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyDcnm2ORqQJhIRRlpV4yAgmGcspY4nZmEI")
+    apiKey: (process.env.GOOGLE_API_KEY)
   })(GoogleMapsComponent)

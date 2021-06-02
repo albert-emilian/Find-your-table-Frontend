@@ -1,0 +1,6 @@
+.restaurant-item-container{
+    border: 2px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 2%;
+}

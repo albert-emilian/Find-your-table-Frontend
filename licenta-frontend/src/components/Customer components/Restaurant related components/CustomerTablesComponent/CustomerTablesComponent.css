@@ -1,0 +1,35 @@
+.table-item{
+    margin-top: -2%;
+}
+
+.reservation-create-inputs{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#reservation-time-picker{
+    position: relative;
+    left: 30%;
+}
+
+#reservation-persons-number{
+    position: relative;
+    left: 30%;
+}
+
+.reservation-create-btn{
+    position: relative;
+    width: 30%;
+    left: 0%;
+    margin: 1%;
+}
+
+.reservation-btn-reserve{
+    position: relative;
+    width: 30%;
+    left: 0%;
+}
+
+.table-details{
+    background-color:rgb(250, 240, 228);
+}

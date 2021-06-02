@@ -1,0 +1,21 @@
+.menu-quantity-button{
+    width: 10%;
+    left: 0%;
+}
+#input-count-value{
+    width: 10%;
+    text-align: center;
+    left: 0%;
+}
+
+.menu-add-button{
+    width: 20%;
+    left: 0%;
+}
+
+.quantity-form{
+    display: flex;
+    position: relative;
+    left: 35%;
+    margin:2% ;
+}

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
 import axios from "axios";
 import { useHistory } from 'react-router-dom'
 import { connect } from "react-redux";
@@ -11,14 +12,23 @@ import {
 import {
   RESERVATION_DELETE_SUCCESS
 } from '../../../actiontypes/index'
+import {Button} from 'react-bootstrap';
+import './CheckoutForm.css'
+import LoadingComponent from '../../LoadingComponent/LoadingComponent'
+
 
  const CheckoutForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const history = useHistory();
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setLoading(true);
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
@@ -42,15 +52,22 @@ import {
 
         console.log("Stripe 35 | data", response.data.success);
         if (response.data.success) {
-        
-          const { accesToken, refreshToken} = response.data;
+          
+          setLoading(false);
+          setSuccessMessage(true);
 
-          localStorage.setItem(ACCESS_TOKEN_CUSTOMER,accesToken);
-          localStorage.setItem(REFRESH_TOKEN_CUSTOMER,refreshToken);
+          setTimeout(() => {
+            const { accesToken, refreshToken} = response.data;
 
-          props.dispatch({type: RESERVATION_DELETE_SUCCESS});
+            localStorage.setItem(ACCESS_TOKEN_CUSTOMER,accesToken);
+            localStorage.setItem(REFRESH_TOKEN_CUSTOMER,refreshToken);
 
-          history.push('/customer/page');
+            props.dispatch({type: RESERVATION_DELETE_SUCCESS});
+
+            history.push('/customer/page');
+          }, 1500);
+
+          
 
         }
       } catch (error) {
@@ -60,12 +77,23 @@ import {
       console.log(error.response.data);
     }
   };
-
+//<CardElement style="background-color: white;"/>
+//
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400 }}>
-      <CardElement />
-      <button>Pay</button>
+    <div>
+     <h2 className="payment-title">We hope you had a great time!</h2>
+     <h3 className="payment-title">Thank you for using our services!🙏🏽</h3>
+    <div className="form-container">
+    <form className="payment-form" style={{ maxWidth: 400 }}>
+      <CardElement/>
+      <Button id="payment-button" onClick={handleSubmit} variant="outline-dark">Pay</Button>
     </form>
+    { successMessage ? <h3 className="payment-response-message">Payment was made successfuly!✅</h3> : null }
+    {
+      loading ? <LoadingComponent className="payment-response-message"/> : null
+    }
+    </div>
+    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { STRIPE_PUBLIC } from '../../../helpers/constants'
 
 import  CheckoutForm  from "../CheckoutForm/CheckoutForm";
+import {CardComponent} from '../CardForm/CardForm'
 
 const PUBLIC_KEY = STRIPE_PUBLIC
 

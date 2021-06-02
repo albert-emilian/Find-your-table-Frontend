@@ -5,7 +5,7 @@ import { signOut } from '../../../actions/authActions'
 import NavBarComponent from '../../NavBarComponent/NavBarComponent'
 import OrderComponent from '../Order related components/OrderComponent/OrderComponent'
 import MenuComponent from '../Menu related components/MenuComponent/MenuComponent'
-
+import './ReservationComponent.css'
 
 const ReservationComponent = (props) => {
 
@@ -20,13 +20,11 @@ const ReservationComponent = (props) => {
 
 
     return (
-        <div>
+            <div>
              <NavBarComponent signOutCustomer={handleSignOutClick}/>
-            <div>
-            <OrderComponent/>
-            </div>
-            <div>
-            <MenuComponent/>
+            <div className="grid-container">
+            <OrderComponent className="reservation-order-container"/>
+            <MenuComponent className="reservation-menu-container"/>
             </div>
         </div>
     )

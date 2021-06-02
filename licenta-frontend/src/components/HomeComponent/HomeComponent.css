@@ -23,7 +23,6 @@
   margin-left: 60%;
   width: 100%;
   font-size: 120%;
-  animation: 2s linear 1s running slideinitem2;
 }
 
 .grid-item-3{
@@ -32,7 +31,6 @@
   margin-left: 16%;
   width: 130%;
   font-size: 120%;
-  animation: 2s linear 1s running slideinitem3;
 }
 
 .title-1{
@@ -42,30 +40,6 @@
 .title-2{
   font-size: 100%;
 
-}
-
-@keyframes slideinitem3 {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
-
-  to {
-    margin-left: 16%;
-    width: 130%;
-  }
-}
-
-@keyframes slideinitem2 {
-  from {
-    margin-left: 200%;
-    width: 300%;
-  }
-
-  to {
-    margin-left: 60%;
-    width: 100%;
-  }
 }
 
 

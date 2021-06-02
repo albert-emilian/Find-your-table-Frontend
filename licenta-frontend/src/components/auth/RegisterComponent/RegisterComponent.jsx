@@ -77,7 +77,7 @@ function SignUp(props){
       <div>
         <div className="container-register-form">
             <form className="form-sign-up">
-                <h3 className="component-title">Register</h3>
+                <h3 className="component-title" id="component-title-register" >Register</h3>
                 <div className="form-group">
                     <label>First name</label>
                     <input name="firstName" type="text" className="form-control" placeholder="First name" onChange={handleChange}/>

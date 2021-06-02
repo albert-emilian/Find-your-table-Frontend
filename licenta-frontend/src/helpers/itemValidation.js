@@ -9,8 +9,10 @@ const itemValidation = (
 
     let errorArray = [];
 
+    const nameWithoutSpace = name.split(" ").join("");
+
     if (
-      validator.isEmpty(name) == true 
+      validator.isEmpty(nameWithoutSpace) == true 
     )
       errorArray.push ({inputName:"name", message: "Name field cannot be empty"});
 
@@ -18,10 +20,9 @@ const itemValidation = (
 
     if(validator.isInt(quantity+"") === false) errorArray.push ({inputName: "quantity", message: 'Invalid quantity  format'});
 
-    if (
-        validator.isEmpty(description) == true ||
-        validator.isAlphanumeric(description) == false
-      )
+    const descriptionWithoutSpace = description.split(" ").join("");
+
+    if (validator.isEmpty(descriptionWithoutSpace) == true)
         errorArray.push ({inputName:"description", message: "Invalid description"});
 
 

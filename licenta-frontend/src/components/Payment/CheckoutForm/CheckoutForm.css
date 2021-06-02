@@ -1,0 +1,45 @@
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    align-items: center;
+    justify-content: center;
+    grid-template-areas:
+      ". ."
+      "payment-form payment-form"
+      ". .";
+  }
+  
+  .payment-form { grid-area: payment-form; }
+
+
+  .form-container{
+      position: relative;
+      border: 2px solid black;
+      border-radius: 20px;
+      width: 60%;
+      text-align: center;
+      left: 20%;
+  }
+
+  .payment-form{
+    position: relative;
+    left: 25%;
+  }
+
+  #payment-button{
+    position: relative;
+    margin-top: 10%;
+    left: 0%;
+  }
+
+  .payment-title{
+      text-align: center;
+  }
+
+  .payment-response-message{
+    position: relative;
+    left: 50%;
+  }
+  

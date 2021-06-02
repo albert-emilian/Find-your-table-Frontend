@@ -8,6 +8,8 @@ import {
     ACCESS_TOKEN_CUSTOMER,
     REFRESH_TOKEN_CUSTOMER
 } from '../../../../helpers/constants'
+import {Button} from 'react-bootstrap'
+import './MenuItemComponent.css'
 
 const MenuItemComponent = (props) => {
 
@@ -37,8 +39,6 @@ const MenuItemComponent = (props) => {
 
         const {accesToken, refreshToken, orderItem, updatedOrder } = result;
 
-        console.log(orderItem)
-
         props.dispatch({type: ADD_ORDER_ITEM, payload:{
             item: orderItem,
             updatedOrder:updatedOrder
@@ -51,21 +51,24 @@ const MenuItemComponent = (props) => {
 
     return (
         <div>
-            <label>
+            <span className="menu-item-info">
                 Name: {props.item.Name}
-            </label>
-            <label>
-                InventoryQuantity: {props.item.InventoryQuantity}
-            </label>
-            <label>
-                Price {props.item.UnitPrice}
-            </label>
-            <span>
-            <button onClick={handleAddButton}>Add</button>
-            <button onClick={handleIncrement}>+</button>
-            <input type="text" readOnly value={quantity.count}/>
-            <button onClick={handleDecrement}>-</button>
             </span>
+            <span className="menu-item-info">
+                Quantity: {props.item.InventoryQuantity}
+            </span>
+            <span className="menu-item-info">
+                Price {props.item.UnitPrice}
+            </span>
+            <div className="quantity-form">
+            <Button  variant="outline-dark" className="menu-quantity-button" onClick={handleIncrement}>+</Button>
+            <input id="input-count-value" className="form-control" type="text" readOnly value={quantity.count}/>
+            <Button variant="outline-dark" className="menu-quantity-button" onClick={handleDecrement}>-</Button>
+            </div>
+            <div>
+            <Button variant="outline-dark" className="menu-add-button" onClick={handleAddButton}>Add</Button>
+            </div>
+            
          
         </div>
     )

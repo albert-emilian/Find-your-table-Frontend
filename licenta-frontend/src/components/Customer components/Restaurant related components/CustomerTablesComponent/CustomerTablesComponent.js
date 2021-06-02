@@ -14,7 +14,8 @@ import {
 import TimePicker from 'react-bootstrap-time-picker';
 import {createReservation} from '../../../../actions/reservationActions'
 import CustomerReservationTableComponent from '../CustomerReservationTableComponent/CustomerReservationTableComponent'
-
+import './CustomerTablesComponent.css'
+import {Button} from 'react-bootstrap'
 
 
 export const CustomerTablesComponent = (props) => {
@@ -106,24 +107,38 @@ export const CustomerTablesComponent = (props) => {
 
     return (
         <div>
-            <div>
-                <button onClick={handleRenderCreateReservationForm}>Reserve</button>
+            <div className="table-item">
+
+                <div className="table-info">
+                    <div className="table-details">Table : {TableName}</div>
+                    <div className="table-details">Size 🪑: {TableSize}</div>
+                </div>
+              { 
+                renderCreateReservation ? null : <Button className="reservation-btn-reserve" variant="outline-dark" onClick={handleRenderCreateReservationForm}>Reserve</Button>
+              }  
               {
               renderCreateReservation ?  
               <div className="form-create-reservation">
-                    <label>
-                    Number of persons
-                    <input type="number" name="numberOfPersons" min="1" max="20" onChange={handleChange}></input>
-                    {
-                    validationError.isError ? <p>{validationError.message}</p> : null
-                    }
-                    </label>  
-                    <label>
+                    
+                    <div className="reservation-create-inputs">
+                        <label>
+                        Number of persons
+                        <div>
+                        <input id="reservation-persons-number" className="form-control" type="number" name="numberOfPersons" min="1" max="20" onChange={handleChange}></input>
+                        {
+                        validationError.isError ? <p>{validationError.message}</p> : null
+                        }
+                        </div>
+                        </label> 
+                    </div> 
+                    <div className="reservation-create-inputs">
                         Reservation Hour
-                        <TimePicker value={reservation.reservationHour}  start="10:00" end="21:00" step={15} onChange={handleTimeChange} />
-                    </label>
-                    <button onClick={handleCreateReservation}>Create reservation</button>
-                    <button onClick={handleCloseCreateReservationForm}>Close</button>
+                        <TimePicker id="reservation-time-picker" value={reservation.reservationHour}  start="8:00" end="21:00" step={15} onChange={handleTimeChange} />
+                    </div>
+                    <div>
+                    <Button className="reservation-create-btn" variant="outline-dark" onClick={handleCreateReservation}>Create reservation</Button>
+                    <Button className="reservation-create-btn" variant="outline-dark" onClick={handleCloseCreateReservationForm}>Close</Button>
+                    </div>
                     <div>
                         <CustomerReservationTableComponent tableId={TableId}/>
                     </div>

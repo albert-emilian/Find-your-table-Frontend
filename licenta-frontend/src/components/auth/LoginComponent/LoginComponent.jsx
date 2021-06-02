@@ -60,13 +60,13 @@ function Login(props) {
                 <h3 className="form-login-title">Login</h3>
                 <div className="form-login-group">
                     <label className="input-label">Email</label>
-                    <input id="login-input-email" name="email" type="email" className="form-control" placeholder="Enter email" onChange={handleChange}/>
+                    <input id="login-input-email" name="email" type="email" className="form-control " placeholder="Enter email" onChange={handleChange}/>
                     <div className="input-error-login-email">{renderError(props.validationErrors,EMAIL)}</div>
                 </div>
 
                 <div className="form-login-group">
                     <label className="input-label">Password</label>
-                    <input id="login-input-password" name="password" type="password" className="form-control" placeholder="Enter password" onChange={handleChange}/>
+                    <input id="login-input-password" name="password" type="password" className="form-control col-sm" placeholder="Enter password" onChange={handleChange}/>
                     <div className="input-error-login-password">{renderError(props.validationErrors,PASSWORD)}</div>
                 </div>
 

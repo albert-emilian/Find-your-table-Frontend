@@ -1,0 +1,17 @@
+.grid-container {
+    display: grid;
+    position: relative;
+    margin-top: 5%;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "reservation-order-container reservation-menu-container";
+  }
+  
+  .reservation-order-container { grid-area: reservation-order-container; }
+  
+  .reservation-menu-container { grid-area: reservation-menu-container; }
+  
